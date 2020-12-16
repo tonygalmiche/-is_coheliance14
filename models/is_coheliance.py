@@ -105,7 +105,7 @@ class IsAffaire(models.Model):
     contact_client_id = fields.Many2one('res.partner', 'Contact client', required=False)
     article_id = fields.Many2one('product.template', 'Article', required=True)
     intitule = fields.Text("Intitulé", required=True)
-    objecti = fields.Text("Objectifs", required=False, help="Pour les conventions de formations")
+    objectif = fields.Text("Objectifs", required=False, help="Pour les conventions de formations")
     descriptif = fields.Text("Descriptif / Programme", required=True)
     methode_pedagogique = fields.Text("Méthodes et supports pédagogiques", required=False, help="Pour les conventions de formations")
     personnes_concernees = fields.Text("Personnes concernées", required=False)
@@ -220,31 +220,30 @@ class IsAffaire(models.Model):
 #         return quotation
 
 
-#     def action_generer_commande(self, cr, uid, ids, context=None):
-#         order_obj = self.pool.get('sale.order')
-#         res={}
-#         for obj in self.browse(cr, uid, ids, context=context):
-#             if obj.order_id :
-#                 if obj.order_id.state in ('draft', 'sent', 'cancel'):
-#                     order_obj.unlink(cr, uid, [obj.order_id.id], context=context)
-#                 else:
-#                     raise osv.except_osv(_('Avertissement'), _(u"Vous ne pouvez pas créer une autre commande, car celle-ci est déjà confirmée"))
-#             vals = self.prepare_commande(cr, uid, ids, obj, context=context)
-#             new_id = order_obj.create(cr, uid, vals, context=context)
-#             res = self.write(cr, uid, obj.id, {'order_id': new_id}, context=context)
-#         return res  
+    def action_generer_commande(self):
+        order_obj = self.env['sale.order']
+        for obj in self:
+            if obj.order_id :
+                if obj.order_id.state in ('draft', 'sent', 'cancel'):
+                    order_obj.unlink(cr, uid, [obj.order_id.id], context=context)
+                else:
+                    raise osv.except_osv(_('Avertissement'), _(u"Vous ne pouvez pas créer une autre commande, car celle-ci est déjà confirmée"))
+            vals = self.prepare_commande(cr, uid, ids, obj, context=context)
+            new_id = order_obj.create(cr, uid, vals, context=context)
+            res = self.write(cr, uid, obj.id, {'order_id': new_id}, context=context)
+        return res  
 
 
-#     def action_detail_frais(self, cr, uid, ids, context=None):
-#         for obj in self.browse(cr, uid, ids, context=context):
-#             return {
-#                 'name': "Détail des frais",
-#                 'view_type': 'form',
-#                 'view_mode': 'tree,form',
-#                 'res_model': 'is.frais.ligne',
-#                 'type': 'ir.actions.act_window',
-#                 'domain': [('affaire_id','=',obj.id)],
-#             }
+    def action_detail_frais(self):
+        for obj in self:
+            return {
+                'name': "Détail des frais",
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'is.frais.ligne',
+                'type': 'ir.actions.act_window',
+                'domain': [('affaire_id','=',obj.id)],
+            }
 
 
 #     def create(self, cr, uid, vals, context=None):
@@ -296,8 +295,8 @@ class is_affaire_intervenant(models.Model):
     taux3                = fields.Float("Taux journée")
 
 
-    # def print_convention_st(self, cr, uid, ids, context=None):
-    #     return self.pool['report'].get_action(cr, uid, ids, 'is_coheliance.report_convention_st', context=context)
+    def print_convention_st(self):
+        return self.pool['report'].get_action(cr, uid, ids, 'is_coheliance.report_convention_st', context=context)
 
 
 class is_affaire_intervention(models.Model):
@@ -402,7 +401,7 @@ class is_acompte(models.Model):
     date_acompte    = fields.Date("Date acompte")
     montant_acompte = fields.Float("Montant acompte")
     commentaire     = fields.Text("Commentaire")
-    #account_id      = fields.Many2one('account.invoice', "Facture d'acompte")
+    account_id      = fields.Many2one('account.move', "Facture d'acompte")
 
 
 class is_affaire_vente(models.Model):

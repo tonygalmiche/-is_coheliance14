@@ -38,7 +38,7 @@ InfoSaône - Module Odoo 14 pour Coheliance
         "views/sale_view.xml",
 #        "views/account_invoice_view.xml",
 #        "views/account_bank_statement_view.xml",
-#        "views/is_coheliance_view.xml",
+        "views/is_coheliance_view.xml",
 #        "views/is_coheliance_sequence.xml",
         "views/is_suivi_tresorerie_view.xml",
         "views/is_export_compta.xml",
