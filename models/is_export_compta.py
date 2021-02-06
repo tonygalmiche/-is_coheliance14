@@ -49,43 +49,43 @@ class is_export_compta(models.Model):
                     type_facture=['in_invoice', 'in_refund']
                     journal='AC'
                 filter=[
-                    ('state'       , 'in' , ['open','paid']),
-                    ('type'        , 'in' , type_facture)
+                    ('state'    , 'in' , ['posted']),
+                    ('move_type', 'in' , type_facture)
                 ]
                 if obj.date_debut:
-                    filter.append(('date_invoice', '>=', obj.date_debut))
+                    filter.append(('invoice_date', '>=', obj.date_debut))
                 if obj.date_fin:
-                    filter.append(('date_invoice', '<=', obj.date_fin))
+                    filter.append(('invoice_date', '<=', obj.date_fin))
                 if obj.num_debut:
                     filter.append(('number', '>=', obj.num_debut))
                 if obj.num_fin:
                     filter.append(('number', '<=', obj.num_fin))
-                invoices = self.env['account.invoice'].search(filter, order="date_invoice,id")
+                invoices = self.env['account.move'].search(filter, order="invoice_date,id")
                 if len(invoices)==0:
                     raise Warning('Aucune facture à traiter')
                 for invoice in invoices:
                     sql="""
                         SELECT  
-                            ai.date_invoice,
+                            am.invoice_date,
                             aa.code, 
-                            ai.number, 
+                            am.name, 
                             rp.name, 
                             aml.name,
-                            ai.type, 
+                            am.move_type, 
                             rp.is_code_fournisseur,
-                            ai.is_nom_fournisseur,
+                            am.is_nom_fournisseur,
                             aml.account_id,
-                            ai.is_affaire_id,
-                            ai.id,
+                            am.is_affaire_id,
+                            am.id,
                             sum(aml.debit), 
                             sum(aml.credit)
 
-                        FROM account_move_line aml inner join account_invoice ai             on aml.move_id=ai.move_id
+                        FROM account_move_line aml inner join account_move am                on aml.move_id=am.id
                                                    inner join account_account aa             on aml.account_id=aa.id
-                                                   inner join res_partner rp                 on ai.partner_id=rp.id
-                        WHERE ai.id="""+str(invoice.id)+"""
-                        GROUP BY ai.date_invoice, ai.number, rp.name, aml.name, aa.code, ai.type, ai.date_due, rp.supplier,rp.is_code_fournisseur,ai.is_nom_fournisseur,aml.account_id,ai.is_affaire_id,ai.id
-                        ORDER BY ai.date_invoice, ai.number, rp.name, aml.name, aa.code, ai.type, ai.date_due, rp.supplier,rp.is_code_fournisseur,ai.is_nom_fournisseur,aml.account_id,ai.is_affaire_id,ai.id
+                                                   inner join res_partner rp                 on am.partner_id=rp.id
+                        WHERE am.id="""+str(invoice.id)+"""
+                        GROUP BY am.invoice_date, am.name, rp.name, aml.name, aa.code, am.move_type, am.invoice_date_due, rp.is_code_fournisseur,am.is_nom_fournisseur,aml.account_id,am.is_affaire_id,am.id
+                        ORDER BY am.invoice_date, am.name, rp.name, aml.name, aa.code, am.move_type, am.invoice_date_due, rp.is_code_fournisseur,am.is_nom_fournisseur,aml.account_id,am.is_affaire_id,am.id
                     """
                     cr.execute(sql)
                     for row in cr.fetchall():
@@ -94,11 +94,11 @@ class is_export_compta(models.Model):
                         affaire    = ''
                         affaire_id = row[9] or False
                         filter=[
-                            ('invoice_id', '=', row[10]),
+                            ('move_id', '=', row[10]),
                             ('account_id', '=', row[8]),
                             ('name'      , '=', row[4]),
                         ]
-                        lines = self.env['account.invoice.line'].search(filter)
+                        lines = self.env['account.move.line'].search(filter)
                         for line in lines:
                             if line.is_affaire_id.id:
                                 affaire_id = line.is_affaire_id.id

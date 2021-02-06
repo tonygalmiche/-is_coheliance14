@@ -31,23 +31,23 @@ class AccountMove(models.Model):
     is_msg_err               = fields.Char('Message', compute='_compute', readonly=True)
 
 
-    def create(self, cr, uid, vals, context=None):
-        new_id = super(account_invoice, self).create(cr, uid, vals, context=context)
-        origin = self.browse(cr, uid, new_id, context).origin
-        if origin:
-            sql="select id,affaire_id from sale_order where name= '"+origin+"' order by id desc limit 1"
-            cr.execute(sql)
-            res=cr.fetchone()
-            if res:
-                order_id      = res[0] or False
-                is_affaire_id = res[1] or False
-                if order_id:
-                    vals={
-                        'order_id'     : order_id,
-                        'is_affaire_id': is_affaire_id,
-                    }
-                    self.write(cr, uid, new_id, vals, context=context)
-        return new_id
+    # def create(self, cr, uid, vals, context=None):
+    #     new_id = super(account_invoice, self).create(cr, uid, vals, context=context)
+    #     origin = self.browse(cr, uid, new_id, context).origin
+    #     if origin:
+    #         sql="select id,affaire_id from sale_order where name= '"+origin+"' order by id desc limit 1"
+    #         cr.execute(sql)
+    #         res=cr.fetchone()
+    #         if res:
+    #             order_id      = res[0] or False
+    #             is_affaire_id = res[1] or False
+    #             if order_id:
+    #                 vals={
+    #                     'order_id'     : order_id,
+    #                     'is_affaire_id': is_affaire_id,
+    #                 }
+    #                 self.write(cr, uid, new_id, vals, context=context)
+    #     return new_id
 
 
     def actualiser_affaire_sur_facture_action(self):
@@ -95,6 +95,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     is_affaire_id = fields.Many2one('is.affaire', 'Affaire')
+    is_account_invoice_line_id = fields.Integer('Lien entre account_invoice_line et account_move_line pour la migration')
 
 
     def product_id_change(self, product, uom_id, qty=0, name='', type='out_invoice',

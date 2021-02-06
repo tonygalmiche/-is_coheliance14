@@ -41,7 +41,7 @@ class is_suivi_facture(models.Model):
                     fsens(ai.move_type)*ai.amount_total   as total_ttc,
                     fsens(ai.move_type)*ai.amount_residual_signed as reste_a_payer
                 FROM account_move ai
-                WHERE ai.state in ('open', 'paid') and ai.move_type in ('out_invoice', 'out_refund')
+                WHERE ai.state='posted' and ai.move_type in ('out_invoice', 'out_refund')
                       and ai.invoice_date>='2016-06-01' 
             )
         """)

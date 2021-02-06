@@ -76,12 +76,12 @@ class is_bilan_pedagogique(models.Model):
 
             sql="""
                 select sum(ail.quantity*price_unit)
-                from account_invoice_line ail inner join account_invoice ai on ail.invoice_id=ai.id
+                from account_move_line ail inner join account_move ai on ail.move_id=ai.id
                                               inner join product_product pp on ail.product_id=pp.id
                                               inner join res_partner     rp on ai.partner_id=rp.id 
-                where ai.date_invoice>='"""+str(obj.name)+"""-01-01' and 
-                      ai.date_invoice<='"""+str(obj.name)+"""-12-31' and
-                      ai.type='in_invoice' and
+                where ai.invoice_date>='"""+str(obj.name)+"""-01-01' and 
+                      ai.invoice_date<='"""+str(obj.name)+"""-12-31' and
+                      ai.move_type='in_invoice' and
                       rp.name='SOUS-TRAITANTS' 
             """
 

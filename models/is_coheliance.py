@@ -17,6 +17,7 @@ def _date_creation():
 
 class IsAffaire(models.Model):
     _name = 'is.affaire'
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = "Affaire"
     _order='name desc'
 
@@ -94,19 +95,19 @@ class IsAffaire(models.Model):
 
 
     name = fields.Char("Code de l'affaire")
-    version = fields.Char("Version", required=True, size=4)
-    date_creation = fields.Date("Date de création")
+    version = fields.Char("Version", required=True, size=4, default="1")
+    date_creation = fields.Date("Date de création", default=lambda self: fields.Datetime.now())
     date_signature = fields.Date("Date de signature")
-    date_relance = fields.Date("Date de relance")
-    createur_id = fields.Many2one('res.users', 'Créateur')
-    interlocutrice_id = fields.Many2one('res.users', 'Interlocutrice administrative')
-    pilote_id = fields.Many2one('res.users', 'Pilote', required=True)
+    date_relance = fields.Date("Date de relance", default=lambda self: fields.Datetime.now()+timedelta(30))
+    createur_id = fields.Many2one('res.users', 'Créateur', default=lambda self: self.env.user)
+    interlocutrice_id = fields.Many2one('res.users', 'Interlocutrice administrative', default=lambda self: self.env.user)
+    pilote_id = fields.Many2one('res.users', 'Pilote', required=True, default=lambda self: self.env.user)
     client_id = fields.Many2one('res.partner', 'Client', required=True)
     contact_client_id = fields.Many2one('res.partner', 'Contact client', required=False)
     article_id = fields.Many2one('product.template', 'Article', required=True)
     intitule = fields.Text("Intitulé", required=True)
     objectif = fields.Text("Objectifs", required=False, help="Pour les conventions de formations")
-    descriptif = fields.Text("Descriptif / Programme", required=True)
+    descriptif = fields.Text("Descriptif / Programme", required=True, default="Descriptif précis de la mission, des compétences et moyens mis en œuvre ainsi que des résultats attendus ou modalités de réalisation : voir document annexe.")
     methode_pedagogique = fields.Text("Méthodes et supports pédagogiques", required=False, help="Pour les conventions de formations")
     personnes_concernees = fields.Text("Personnes concernées", required=False)
     lieu_intervention = fields.Char("Lieu d'intervention")
@@ -147,22 +148,7 @@ class IsAffaire(models.Model):
         ('en_attente', 'En attente'),
         ('valide'    , 'Validé'),
         ('annule'    , 'Annulé'),
-        ('solde'     , 'Soldé')], string="État", readonly=True, index=True)
-
-
-#     _defaults = {
-#         'name': '',
-#         'intitule': '',
-#         'descriptif': 'Descriptif précis de la mission, des compétences et moyens mis en œuvre ainsi que des résultats attendus ou modalités de réalisation : voir document annexe.',
-#         'version': '1',
-#         'createur_id': lambda obj, cr, uid, context: uid,
-#         'interlocutrice_id': lambda obj, cr, uid, context: uid,
-#         'pilote_id': lambda obj, cr, uid, context: uid,
-#         'date_creation': fields.datetime.now,
-#         'date_relance':   (datetime.now() + timedelta(30)).strftime('%Y-%m-%d'),
-#         'unite_temps': 'jour',
-#         'state': 'en_attente',
-#     }
+        ('solde'     , 'Soldé')], string="État", readonly=True, index=True, default="en_attente")
 
 
 #     def prepare_commande(self, cr, uid, ids, obj, context=None):
@@ -353,24 +339,19 @@ class is_affaire_intervention(models.Model):
 
 
     affaire_id             = fields.Many2one('is.affaire', 'Affaire', required=True)
-    date                   = fields.Date("Date", required=True)
-    associe_id             = fields.Many2one('res.users', 'Associé')
+    date                   = fields.Date("Date", required=True, default=lambda self: fields.Datetime.now())
+    associe_id             = fields.Many2one('res.users', 'Associé', default=lambda self: self.env.user)
     sous_traitant_id       = fields.Many2one('res.partner', 'Sous-Traitant')
     temps_passe            = fields.Float("Temps passé", required=True)
-    unite_temps            = fields.Selection([('heure','Heure'),('demi-jour','Demi-journée'),('jour','Jour')], "Unité de temps", required=True)
+    unite_temps            = fields.Selection([('heure','Heure'),('demi-jour','Demi-journée'),('jour','Jour')], "Unité de temps", default="heure", required=True)
     nb_stagiaire           = fields.Integer("Nombre de stagiaires")
     temps_formation        = fields.Float(compute=_temps_formation, string="Temps de formation", store=True, )
-    facturable             = fields.Boolean("Facturable")
+    facturable             = fields.Boolean("Facturable", default=True)
     montant_facture        = fields.Float(compute=_montant_facture, string="Montant à facturer", store=True)
     montant_non_facturable = fields.Float(compute=_montant_non_facturable, string="Montant non facturable", store=True)
     commentaire            = fields.Text(u"Commentaire")
 
-    # _defaults = {
-    #     'associe_id': lambda obj, cr, uid, context: uid,
-    #     'date': fields.datetime.now,
-    #     'unite_temps': 'heure',
-    #     'facturable': True,
-    # }
+ 
 
 
     # def write(self, cr, uid, ids, vals, context=None):

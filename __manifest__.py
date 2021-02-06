@@ -21,12 +21,22 @@ InfoSaône - Module Odoo 14 pour Coheliance
 #        "account_voucher",        # eFacturation & Règlements
 #        "account_accountant",     # Comptabilité et finance
         "sale",                   # Gestion des ventes
+        "sale_management",
         "purchase",               # Gestion des achats
 #        "sale_order_dates",       # Ajout de champs dates dans les commandes clients (date demandée)
         "project",                # Gestin de projets
         "hr",                     # Répertoire des employés
 #        "hr_timesheet_sheet",     # Feuilles de temps
 #        "report",
+        "board",
+        "hr_attendance",
+        "hr_timesheet",
+        "sale_stock",
+        "stock",
+        "stock_account",
+        "account_menu",
+        "web_sheet_full_width",
+
     ],
     "init_xml" : [],             # Liste des fichiers XML à installer uniquement lors de l"installation du module
     "demo_xml" : [],             # Liste des fichiers XML à installer pour charger les données de démonstration
