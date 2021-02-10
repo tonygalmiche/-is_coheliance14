@@ -14,20 +14,16 @@ InfoSaône - Module Odoo 14 pour Coheliance
     "website": "http://www.infosaone.com",
     "depends" : [
         "base",
+        "account",
         "mail",
-        "calendar",               # Agenda
-        "crm",                    # CRM
-#        "account",
-#        "account_voucher",        # eFacturation & Règlements
-#        "account_accountant",     # Comptabilité et finance
-        "sale",                   # Gestion des ventes
+        "calendar",
+        "crm",
+        "sale",
         "sale_management",
-        "purchase",               # Gestion des achats
+        "purchase",
 #        "sale_order_dates",       # Ajout de champs dates dans les commandes clients (date demandée)
-        "project",                # Gestin de projets
-        "hr",                     # Répertoire des employés
-#        "hr_timesheet_sheet",     # Feuilles de temps
-#        "report",
+        "project",
+        "hr",
         "board",
         "hr_attendance",
         "hr_timesheet",
@@ -36,20 +32,21 @@ InfoSaône - Module Odoo 14 pour Coheliance
         "stock_account",
         "account_menu",
         "web_sheet_full_width",
+        "journal_sequence",
 
     ],
-    "init_xml" : [],             # Liste des fichiers XML à installer uniquement lors de l"installation du module
-    "demo_xml" : [],             # Liste des fichiers XML à installer pour charger les données de démonstration
+    "init_xml" : [],
+    "demo_xml" : [],
     "data" : [
         "security/ir.model.access.csv",
         "views/assets.xml",
         "views/product_view.xml", 
         "views/res_partner_view.xml", 
         "views/sale_view.xml",
-#        "views/account_invoice_view.xml",
+        "views/account_move_view.xml",
 #        "views/account_bank_statement_view.xml",
         "views/is_coheliance_view.xml",
-#        "views/is_coheliance_sequence.xml",
+        "views/is_coheliance_sequence.xml",
         "views/is_suivi_tresorerie_view.xml",
         "views/is_export_compta.xml",
 #        "views/is_coheliance_report.xml",
@@ -73,9 +70,9 @@ InfoSaône - Module Odoo 14 pour Coheliance
         "report/is_suivi_intervention.xml",
         "report/is_account_invoice_line.xml",
         "views/menu.xml",
-    ],                           # Liste des fichiers XML à installer lors d"une mise à jour du module (ou lord de l"installation)
-    "installable": True,         # Si False, ce module sera visible mais non installable (intéret ?)
-    "active": False,             # Si True, ce module sera installé automatiquement dés la création de la base de données d"OpenERP
+    ],
+    "installable": True,
+    "active": False,
     "application": True,
 }
 

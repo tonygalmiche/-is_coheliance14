@@ -10,7 +10,7 @@ class IsSuiviCaisse(models.Model):
 
 
     def _compute_solde(self):
-        cr, uid, context = self.env.args
+        cr = self._cr
         for obj in self:
             cr.execute("select sum(credit-debit) from is_suivi_caisse where date<='"+str(obj.date)+"' and id>="+str(obj.id)+" ")
             obj.solde=cr.fetchone()[0] or 0.0

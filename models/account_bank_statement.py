@@ -14,15 +14,10 @@ class account_bank_statement(models.Model):
     @api.multi
     def export_compta_banque_action(self):
         for obj in self:
-            print obj
-
             vals={
                 'type_interface': 'banque',
             }
             export = self.env['is.export.compta'].create(vals)
-
-
-
             for line in obj.line_ids:
                 print line
 
@@ -32,7 +27,6 @@ class account_bank_statement(models.Model):
                     debit = abs(line.amount)
                 else:
                     credit = line.amount
-
                 vals={
                     'export_compta_id'  : export.id,
                     'date_facture'      : line.date,
@@ -47,7 +41,6 @@ class account_bank_statement(models.Model):
 #                    'commentaire'       : False,
                 }
                 self.env['is.export.compta.ligne'].create(vals)
-
 
             return {
                 'name': u'Export banque',

@@ -15,26 +15,26 @@
 
 
         <!-- res.partner -->
-        <!-- <record model="ir.ui.view" id="is_view_partner_form">
+        <record model="ir.ui.view" id="is_view_partner_form">
             <field name="name">is_view_partner_form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[@name='buttons']" position="inside">
+                <div name="button_box" position="inside">
                     <button 
                         class="oe_inline oe_stat_button" 
                         type="action" 
-                        name="%(is_coheliance.is_affaire_action)d" 
+                        name="%(is_coheliance14.is_affaire_action)d" 
                         context="{'search_default_client_id': active_id, 'default_client_id': active_id}"
                         icon="fa-th-list">
                         <field  string="Affaires" name="affaire_count" widget="statinfo"/>
                     </button>
-                </xpath>
+                </div>
                 <field name="name" position="before">
                     <field name="is_prenom" placeholder="Prénom" string="Prénom" attrs="{'invisible': [('is_company','=', True)]}"/>
                 </field>
                 <field name="street2" position="after">
-                    <field name="is_bp" placeholder="Boite postale" attrs="{'readonly': [('use_parent_address','=',True)]}" />
+                    <field name="is_bp" placeholder="Boite postale" attrs="{'readonly': [('parent_id','!=',False)]}" />
                 </field>
                 <field name="website" position="before">
                     <field name="is_region_id"/>
@@ -48,17 +48,20 @@
                     <field name="is_secteur_activite_id" attrs="{'invisible': [('is_company','!=', True)]}"/>
                     <field name="is_typologie_id"        attrs="{'invisible': [('is_company','!=', True)]}"/>
                 </field>
+                
                 <field name="function" position="replace">
                     <field name="function" string="Fonction" attrs="{'invisible': [('is_company','=', True)]}"/>
                     <field name="is_responsable"             attrs="{'invisible': [('is_company','=', True)]}"/>
                     <field name="is_classification_id"       attrs="{'invisible': [('is_company','=', True)]}"/>
                 </field>
-                <field name="property_account_position" position="before">
+                
+                <field name="property_account_position_id" position="before">
                     <field name="is_code_fournisseur" attrs="{'invisible': [('is_company','!=', True)]}"/>
                     <field name="is_siret"            attrs="{'invisible': [('is_company','!=', True)]}"/>
                     <field name="is_num_declaration_activite"/>
                     <field name="is_ape"              attrs="{'invisible': [('is_company','!=', True)]}"/>
                 </field>
+                <!--
                 <xpath expr="//notebook/page[@string='Contacts']/field[@name='child_ids']/kanban/templates/t/div/div/div/div/table" position="replace">
                     <table class="oe_kanban_table">
                         <tr>
@@ -77,10 +80,10 @@
                             </td>
                         </tr>
                     </table>
-                </xpath>
+                </xpath> -->
 
             </field>
-        </record>    -->
+        </record> 
         <!-- Supprimer le bouton pour accèder aux oportunités -->
         <record id="is_view_partners_form_crm1" model="ir.ui.view">
             <field name="name">is_view_partners_form_crm1</field>
@@ -130,8 +133,8 @@
                     <field name="is_email_perso"/>
                     <field name="is_secteur_activite_id"/>
                     <field name="is_typologie_id"/>
-                    <!-- <field name="property_account_receivable"/>
-                    <field name="property_account_payable"/> -->
+                    <field name="property_account_receivable_id"/>
+                    <field name="property_account_payable_id"/>
                     <field name="is_code_fournisseur"/>
                 </field>
             </field>

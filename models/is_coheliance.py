@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from datetime import datetime, timedelta
-#import time
 from odoo import api, fields, models
+from odoo.exceptions import Warning
 
 
 def _get_annee():
@@ -122,9 +121,9 @@ class IsAffaire(models.Model):
     modalite_paiement = fields.Text("Modalités de paiement")
     frais_a_refacturer = fields.Text("Frais à refacturer")
     intervenant_ids = fields.One2many('is.affaire.intervenant', 'affaire_id', 'Intervenants')
-    date_validation = fields.Date("Date de validation")
-    date_solde = fields.Date("Date annulé ou soldé")
-    order_id = fields.Many2one('sale.order', 'Commande', readonly=False)
+    date_validation = fields.Date("Date de validation", copy=False)
+    date_solde = fields.Date("Date annulé ou soldé", copy=False)
+    order_id = fields.Many2one('sale.order', 'Commande', readonly=False, copy=False)
     origine_financement_id = fields.Many2one('is.origine.financement', 'Origine du financement')
     nb_stagiaire = fields.Integer(compute=_nb_stagiaire, string="Nombre de stagiaires", store=True, )
     type_stagiaire_organisme_id = fields.Many2one('is.type.stagiaire.organisme', "Type de stagiaire de l'organisme")
@@ -148,76 +147,65 @@ class IsAffaire(models.Model):
         ('en_attente', 'En attente'),
         ('valide'    , 'Validé'),
         ('annule'    , 'Annulé'),
-        ('solde'     , 'Soldé')], string="État", readonly=True, index=True, default="en_attente")
+        ('solde'     , 'Soldé')], string="État", readonly=False, index=True, default="en_attente")
 
-
-#     def prepare_commande(self, cr, uid, ids, obj, context=None):
-#         order_line_obj = self.pool.get('sale.order.line')
-#         sale_obj = self.pool.get('sale.order')
-        
-#         quotation={}
-#         lines = []
-#         order_line_obj= self.pool.get('sale.order.line')
-#         quotation_line = order_line_obj.product_id_change(cr, uid, ids, obj.client_id.property_product_pricelist.id, 
-#                                                           obj.article_id.id, 0, False, 0, False, '', obj.client_id.id, 
-#                                                          False, True, False, False, False, False, context=context)['value']
-#         quotation_line.update({'product_id':obj.article_id.id, 'product_uom_qty': 1})
-#         if 'tax_id' in quotation_line:
-#             quotation_line.update({'tax_id': [[6, False, quotation_line['tax_id']]]})
-
-#         intitule=u"Intitulé :\n"+obj.intitule+"\n\n"
-#         intitule=intitule+u"Descriptif :\n"+obj.descriptif+"\n\n"
-#         if obj.personnes_concernees:
-#             intitule=intitule+u"Personnes Concernées :\n"+obj.personnes_concernees+"\n\n"
-#         if obj.lieu_intervention:
-#             intitule=intitule+u"Lieu d'intervention :\n"+obj.lieu_intervention+"\n\n"
-#         if obj.date_debut:
-#             intitule=intitule+u"Date de début :\n"+obj.date_debut+"\n\n"
-#         if obj.date_fin:
-#             intitule=intitule+u"Date de fin :\n"+obj.date_fin+"\n\n"
-#         if obj.duree_prestation:
-#             intitule=intitule+u"Durée de la prestation :\n"+obj.duree_prestation+"\n\n"
-
-#         intitule=intitule+"Intervenants :"
-#         for intervenant in obj.intervenant_ids:
-#             name=""
-#             if intervenant.associe_id:
-#                 name=intervenant.associe_id.name
-#             if intervenant.sous_traitant_id:
-#                 name=intervenant.sous_traitant_id.name
-#                 if intervenant.sous_traitant_id.is_prenom:
-#                     name=intervenant.sous_traitant_id.is_prenom+' '+intervenant.sous_traitant_id.name
-#             intitule=intitule+"\n- "+name
-
-#         quotation_line.update({'name': intitule})
-#         quotation_line.update({'price_unit': obj.budget_propose})
-#         lines.append([0,False,quotation_line]) 
-#         quotation_values = {
-#             'name': '/',
-#             'partner_id': obj.client_id.id,
-#             'origin': obj.name,
-#             'order_line': lines,
-#             'picking_policy': 'direct',
-#             'order_policy': 'manual',
-#             'invoice_quantity': 'order',
-#             'affaire_id': obj.id,
-#         }
-#         quotation.update(quotation_values)
-#         return quotation
-
+ 
 
     def action_generer_commande(self):
-        order_obj = self.env['sale.order']
         for obj in self:
             if obj.order_id :
                 if obj.order_id.state in ('draft', 'sent', 'cancel'):
-                    order_obj.unlink(cr, uid, [obj.order_id.id], context=context)
+                    obj.order_id.unlink()
                 else:
-                    raise osv.except_osv(_('Avertissement'), _(u"Vous ne pouvez pas créer une autre commande, car celle-ci est déjà confirmée"))
-            vals = self.prepare_commande(cr, uid, ids, obj, context=context)
-            new_id = order_obj.create(cr, uid, vals, context=context)
-            res = self.write(cr, uid, obj.id, {'order_id': new_id}, context=context)
-        return res  
+                    raise Warning('Vous ne pouvez pas créer une autre commande, car celle-ci est déjà confirmée')
+
+            # quotation_line = order_line_obj.product_id_change(cr, uid, ids, obj.client_id.property_product_pricelist.id, 
+            #                                                 obj.article_id.id, 0, False, 0, False, '', obj.client_id.id, 
+            #                                                 False, True, False, False, False, False, context=context)['value']
+            quotation_line={
+                'product_id': obj.article_id.id, 
+                'product_uom_qty': 1
+            }
+            # if 'tax_id' in quotation_line:
+            #     quotation_line.update({'tax_id': [[6, False, quotation_line['tax_id']]]})
+            intitule="Intitulé :\n"+obj.intitule+"\n\n"
+            intitule=intitule+"Descriptif :\n"+obj.descriptif+"\n\n"
+            if obj.personnes_concernees:
+                intitule=intitule+"Personnes Concernées :\n"+obj.personnes_concernees+"\n\n"
+            if obj.lieu_intervention:
+                intitule=intitule+"Lieu d'intervention :\n"+obj.lieu_intervention+"\n\n"
+            if obj.date_debut:
+                intitule=intitule+"Date de début :\n"+obj.date_debut+"\n\n"
+            if obj.date_fin:
+                intitule=intitule+"Date de fin :\n"+obj.date_fin+"\n\n"
+            if obj.duree_prestation:
+                intitule=intitule+"Durée de la prestation :\n"+obj.duree_prestation+"\n\n"
+            intitule=intitule+"Intervenants :"
+            for intervenant in obj.intervenant_ids:
+                name=""
+                if intervenant.associe_id:
+                    name=intervenant.associe_id.name
+                if intervenant.sous_traitant_id:
+                    name=intervenant.sous_traitant_id.name
+                    if intervenant.sous_traitant_id.is_prenom:
+                        name=intervenant.sous_traitant_id.is_prenom+' '+intervenant.sous_traitant_id.name
+                intitule=intitule+"\n- "+name
+            quotation_line.update({'name': intitule})
+            quotation_line.update({'price_unit': obj.budget_propose})
+            lines = []
+            lines.append([0,False,quotation_line])
+            vals = {
+                'partner_id': obj.client_id.id,
+                'origin': obj.name,
+                'order_line': lines,
+                'picking_policy': 'direct',
+                'affaire_id': obj.id,
+                'warehouse_id':1,
+                'invoice_status': 'to invoice',
+            }
+            new_id = self.env['sale.order'].create(vals)
+            obj.order_id=new_id.id
+
 
 
     def action_detail_frais(self):
@@ -232,37 +220,25 @@ class IsAffaire(models.Model):
             }
 
 
-#     def create(self, cr, uid, vals, context=None):
-#         data_obj = self.pool.get('ir.model.data')
-#         sequence_ids = data_obj.search(cr, uid, [('name','=','is_affaire_seq')], context=context)
-#         if sequence_ids:
-#             sequence_id = data_obj.browse(cr, uid, sequence_ids[0], context).res_id
-#             vals['name'] = self.pool.get('ir.sequence').get_id(cr, uid, sequence_id, 'id', context=context)
-#         new_id = super(is_affaire, self).create(cr, uid, vals, context=context)
-#         return new_id
+    @api.model
+    def create(self, vals):
+        vals['name'] = self.env['ir.sequence'].next_by_code('is.affaire')
+        res = super(IsAffaire, self).create(vals)
+        return res
 
 
-#     def write(self, cr, uid, ids, vals, context=None):
-#         if 'state' in vals:
-#             vals["date_validation"]=False
-#             vals["date_solde"]=False
-#             if vals["state"]=='valide':
-#                 vals["date_validation"]=datetime.now().strftime('%Y-%m-%d')
-#             if vals["state"]=='solde' or vals["state"]=='annule':
-#                 vals["date_solde"]=datetime.now().strftime('%Y-%m-%d')
+    def write(self, vals):
+        if 'state' in vals:
+            vals["date_validation"]=False
+            vals["date_solde"]=False
+            if vals["state"]=='valide':
+                vals["date_validation"]=datetime.now().strftime('%Y-%m-%d')
+            if vals["state"]=='solde' or vals["state"]=='annule':
+                vals["date_solde"]=datetime.now().strftime('%Y-%m-%d')
+        res=super(IsAffaire, self).write(vals)
+        return res
 
 
-#         res = super(is_affaire, self).write(cr, uid, ids, vals, context=context)
-#         return res
-
-
-#     def copy(self, cr, uid, id, default=None, context=None):
-#         if not context:
-#             context = {}
-#         default.update({
-#             'order_id'     : False,
-#         })
-#         return super(is_affaire, self).copy(cr, uid, id, default=default, context=context)
 
 
 class is_affaire_intervenant(models.Model):

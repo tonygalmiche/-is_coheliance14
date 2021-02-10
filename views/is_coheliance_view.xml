@@ -35,7 +35,7 @@
                 <form>
                     <header>
                         <button name="action_generer_commande" type="object" string="Générer Commande" class="oe_highlight" />
-                        <field name="state" widget="statusbar"  clickable="True" />
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                     </header>
                     <sheet class="oe_form_sheet_width_wider">
                         <group>
@@ -86,7 +86,7 @@
                                         <tree string="Intervenants" editable="bottom">
                                             <field name="annee"/>
                                             <field name="associe_id"/>
-                                            <button string="Convention de sous-traitance" name="print_convention_st" type="object" icon="gtk-print" />
+                                            <button string="Convention de sous-traitance" name="print_convention_st" type="object" icon="fa-print" />
                                             <field name="sous_traitant_id"/>
                                             <field name="duree_mission"/>
                                             <field name="condition_financiere"/>
@@ -147,7 +147,7 @@
                                 <group>
                                     <field name="frais_ids" nolabel="1" context="{'default_affaire_id': id}">
                                         <tree string="Frais">
-                                            <button string="Imprimer la fiche de frais" name="print_fiche_frais" type="object" icon="gtk-print" />
+                                            <button title="Imprimer la fiche de frais" name="print_fiche_frais" type="object" icon="fa-print" />
                                             <field name="name"/>
                                             <field name="date_creation"/>
                                             <field name="intervenant_id"/>
@@ -161,7 +161,7 @@
                                 <group>
                                     <field name="facture_ids" nolabel="1">
                                         <tree>
-                                            <button string="Facture fournisseur" name="voir_facture_fournisseur" type="object" icon="gtk-zoom-in" />
+                                            <button title="Facture fournisseur" name="voir_facture_fournisseur" type="object" icon="fa-search-plus" />
                                             <!-- <field name="internal_number"/> -->
                                             <field name="is_refacturable"/>
                                             <field name="partner_id"     string="Fournisseur" widget="many2one_clickable"/>

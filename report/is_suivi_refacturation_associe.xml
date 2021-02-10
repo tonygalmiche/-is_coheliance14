@@ -46,19 +46,19 @@
             <field name="name">is_suivi_refacturation_associe_graph</field>
             <field name="model">is.suivi.refacturation.associe</field>
             <field name="arch" type="xml">
-                <graph type="pivot">
+                <pivot string="pivot">
                     <field name="date"          type="row"  interval="year"  string="Année"/>
                     <field name="date"          type="row"  interval="month" string="Mois" />
                     <field name="associe_id"    type="col"/>
                     <field name="type_donnee"   type="col"/>
                     <field name="donnee"        type="measure"/>
-                </graph>
+                </pivot>
             </field>
         </record>
         <record id="is_suivi_refacturation_associe_action" model="ir.actions.act_window">
             <field name="name">Suivi refacturation associé</field>
             <field name="res_model">is.suivi.refacturation.associe</field>
-            <field name="view_mode">graph,tree</field>
+            <field name="view_mode">pivot,tree</field>
             <field name="view_id" ref="is_suivi_refacturation_associe_graph"/>
             <field name="domain">[('type_donnee', '!=', 'frais')]</field>
             <field name="context">{
@@ -70,18 +70,18 @@
             <field name="name">is_suivi_refacturation_total_frais_graph</field>
             <field name="model">is.suivi.refacturation.associe</field>
             <field name="arch" type="xml">
-                <graph type="pivot">
+                <pivot string="pivot">
                     <field name="date"       type="row"  interval="year"  string="Année"/>
                     <field name="date"       type="row"  interval="month" string="Mois" />
                     <field name="type_frais" type="col"/>
                     <field name="montant"    type="measure"/>
-                </graph>
+                </pivot>
             </field>
         </record>
         <record id="is_suivi_refacturation_total_frais_action" model="ir.actions.act_window">
             <field name="name">Refacturation total des frais</field>
             <field name="res_model">is.suivi.refacturation.associe</field>
-            <field name="view_mode">graph,tree</field>
+            <field name="view_mode">pivot,tree</field>
             <field name="view_id" ref="is_suivi_refacturation_total_frais_graph"/>
             <field name="domain">[('type_donnee', '=', 'frais')]</field>
             <field name="context">{

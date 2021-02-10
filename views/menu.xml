@@ -6,7 +6,7 @@
         <menuitem id="is_crm_client_menu"              name="Clients"              parent="is_crm_menu" sequence="10" action="is_view_partner_crm_action"/>
         <menuitem id="is_affaire_menu"                 name="Affaires"             parent="is_crm_menu" sequence="20" action="is_affaire_action"/>
         <menuitem id="is_acompte_menu"                 name="Gestion des acomptes" parent="is_crm_menu" sequence="30" action="is_acompte_action"/>
-        <!-- <menuitem id="is_sale_order_menu"              name="Commandes"            parent="is_crm_menu" sequence="40" action="is_action_orders" groups="base.group_sale_salesman,base.group_sale_manager"/> -->
+        <menuitem id="is_sale_order_menu"              name="Commandes"            parent="is_crm_menu" sequence="40" action="is_action_orders" groups="sales_team.group_sale_manager"/> 
         <menuitem id="is_menu_product_template_action" name="Articles"             parent="is_crm_menu" sequence="50" action="is_product_template_action"/>
         <menuitem id="is_crm_frais_menu" name="Frais" parent="is_crm_top_menu" sequence="20"/>
         <menuitem id="is_frais_menu"        parent="is_crm_frais_menu" sequence="10" action="is_frais_action"/>

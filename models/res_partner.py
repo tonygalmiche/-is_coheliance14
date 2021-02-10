@@ -21,12 +21,10 @@ class ResPartner(models.Model):
     #     }
 
 
-    # def _affaire_count(self, cr, uid, ids, field_name, arg, context=None):
-    #     Affaire = self.pool['is.affaire']
-    #     return {
-    #         client_id: Affaire.search_count(cr,uid, [('client_id', '=', client_id)], context=context)
-    #         for client_id in ids
-    #     }
+    def _affaire_count(self):
+        for obj in self:
+            affaires=self.env['is.affaire'].search([('client_id', '=', obj.id)])
+            obj.affaire_count=len(affaires)
 
 
     is_prenom                   = fields.Char("Prénom")
@@ -42,7 +40,7 @@ class ResPartner(models.Model):
     is_liste_diffusion          = fields.Char("Liste de diffusion")
     is_email_perso              = fields.Char("Courriel personnel")
     is_responsable              = fields.Boolean("Responsable structure", help="Est le responsable légal de la structure")
-    #affaire_count               = fields.function(_affaire_count, string=u'# Affaires', type='integer')
+    affaire_count               = fields.Integer(compute=_affaire_count, string='# Affaires')
 
 
     # def name_get(self, cr, uid, ids, context=None):
