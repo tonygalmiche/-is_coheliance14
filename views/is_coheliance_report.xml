@@ -1,71 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
-        <report 
-            id="report_affaires"
-            model="is.affaire"
-            string="Contrat de prestations"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_affaire"
-            file="is_coheliance.report_affaire"
-        />
-        <report 
-            id="report_conventions"
-            model="is.affaire"
-            string="Convention de formation"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_convention"
-            file="is_coheliance.report_convention"
-        />
-        <report 
-            id="report_contrat_formations"
-            model="is.affaire"
-            string="Contrat de formation"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_contrat_formation"
-            file="is_coheliance.report_contrat_formation"
-        />
-
-
-        <report 
-            id="report_conventions_st"
-            model="is.affaire.intervenant"
-            string="Convention de sous-traitance"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_convention_st"
-            file="is_coheliance.report_convention_st"
-        />
-
-
-        <report 
-            id="report_fraiss"
-            model="is.frais"
-            string="Fiche de frais"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_frais"
-            file="is_coheliance.report_frais"
-        />
-
-        <report 
-            id="report_compte_resultats"
-            model="is.compte.resultat.annee"
-            string="Compte de résultat"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_compte_resultat"
-            file="is_coheliance.report_compte_resultat"
-        />
-
-
-        <report 
-            id="report_fiche_fraiss"
-            model="is.fiche.frais"
-            string="Déclaration des frais"
-            report_type="qweb-pdf"
-            name="is_coheliance.report_fiche_frais"
-            file="is_coheliance.report_fiche_frais"
-        />
-
-
-
+        <record id="report_affaires" model="ir.actions.report">
+            <field name="name">Contrat de prestations</field>
+            <field name="model">is.affaire</field>
+            <field name="binding_model_id" ref="model_is_affaire"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_affaire</field>
+            <field name="report_file">is_coheliance14.report_affaire</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <record id="report_conventions" model="ir.actions.report">
+            <field name="name">Convention de formation</field>
+            <field name="model">is.affaire</field>
+            <field name="binding_model_id" ref="model_is_affaire"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_convention</field>
+            <field name="report_file">is_coheliance14.report_convention</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <record id="report_contrat_formations" model="ir.actions.report">
+            <field name="name">Contrat de formation</field>
+            <field name="model">is.affaire</field>
+            <field name="binding_model_id" ref="model_is_affaire"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_contrat_formation</field>
+            <field name="report_file">is_coheliance14.report_contrat_formation</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <record id="report_conventions_st" model="ir.actions.report">
+            <field name="name">Convention de sous-traitance</field>
+            <field name="model">is.affaire.intervenant</field>
+            <field name="binding_model_id" ref="model_is_affaire_intervenant"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_convention_st</field>
+            <field name="report_file">is_coheliance14.report_convention_st</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <record id="report_fraiss" model="ir.actions.report">
+            <field name="name">Fiche de frais</field>
+            <field name="model">is.frais</field>
+            <field name="binding_model_id" ref="model_is_frais"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_frais</field>
+            <field name="report_file">is_coheliance14.report_frais</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <record id="report_compte_resultats" model="ir.actions.report">
+            <field name="name">Compte de résultat</field>
+            <field name="model">is.compte.resultat.annee</field>
+            <field name="binding_model_id" ref="model_is_compte_resultat_annee"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_compte_resultat</field>
+            <field name="report_file">is_coheliance14.report_compte_resultat</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+        <record id="report_fiche_fraiss" model="ir.actions.report">
+            <field name="name">Déclaration des frais</field>
+            <field name="model">is.fiche.frais</field>
+            <field name="binding_model_id" ref="model_is_fiche_frais"/>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_coheliance14.report_fiche_frais</field>
+            <field name="report_file">is_coheliance14.report_fiche_frais</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
     </data>
-</openerp>
+</odoo>

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from odoo import api, fields, models
 from odoo.exceptions import Warning
 
@@ -76,7 +76,7 @@ class IsAffaire(models.Model):
 
 
     def get_annee(self):
-        now  = datetime.date.today()
+        now  = date.today()
         return now.strftime('%Y')
 
 
@@ -258,7 +258,9 @@ class is_affaire_intervenant(models.Model):
 
 
     def print_convention_st(self):
-        return self.pool['report'].get_action(cr, uid, ids, 'is_coheliance.report_convention_st', context=context)
+        for obj in self:
+            report=self.env.ref('is_coheliance14.report_conventions_st')
+            return report.report_action([obj.id])
 
 
 class is_affaire_intervention(models.Model):
