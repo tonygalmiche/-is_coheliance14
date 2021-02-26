@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
 
 
 <template id="report_convention">
@@ -150,14 +149,6 @@
             </div>
             <br />
 
-            <!--
-            <div class="row">
-                Adresse de facturation si différente : 
-            </div>
-            <br />
-            -->
-
-            <!--<div style="border-top:1pt solid black" />-->
             <div class="row border-top" /><br />
 
             <div class="row text-justify">
@@ -220,6 +211,9 @@
 
             <div style="page-break-before:always"/>
 
+
+
+
             <div class="row">
                 <table style="width:100%">
                     <tr><th>Programme</th></tr>
@@ -246,13 +240,22 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
 
                 </table>
             </div>
+
+
+
+
             <br />
             <div class="row cadre">
                 <div class="titre2">Méthodes pédagogiques :</div>
                 <div t-field="o.methode_pedagogique" />
             </div>
             <br />
-            <div class="row cadre">
+
+
+
+
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE III – DEROULEMENT DE LA FORMATION</div>
                 <p class="texte">
                     L' (ou les) intervenant(s) indiqué(s) animera (ou animeront) cette action de formation. Il(s) représentera (ou représenteront) <span t-field="res_company.name"/> qui agit en qualité d’organisme de formation.
@@ -274,8 +277,14 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                 </p>
 
             </div>
+            </div>
             <br />
-            <div class="row cadre">
+
+
+
+
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE IV – DISPOSITIONS FINANCIERES</div>
                 <p class="texte">
                     <ul>
@@ -326,20 +335,6 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
 
                                 </t>
 
-
-
-                                <!--
-                                <tr>
-                                    <td>none">Acompte à la signature :      </td>
-                                    <td style="text-align:right"><span t-field="o.budget_propose" t-field-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
-                                    <td>HT</td>
-                                </tr>
-                                <tr>
-                                    <td>Soit TTC :</td>
-                                    <td style="text-align:right"><span t-field="o.budget_propose" t-field-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
-                                    <td>TTC</td>
-                                </tr>
-                                -->
                             </table>
                         </td>
                         <td style="padding:5mm"  width="50%">
@@ -354,8 +349,14 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                     les temps de préparation de l’action de formation. Les déplacements et l’hébergement seront à la charge du client.
                 </p>
             </div>
+            </div>
             <br />
-            <div class="row cadre">
+
+
+
+
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">RIB</div>
 
                 <table style="border:1pt solid black;" width="100%">
@@ -376,9 +377,14 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                     </tbody>
                 </table>
             </div>
+            </div>
             <div style="page-break-before:always"/>
 
-            <div class="row cadre">
+
+
+
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE V – RESILIATION DE LA CONVENTION</div>
                 <p class="texte">
                     <ul>Conformément à l’article L6354-1 du Code du Travail :</ul>
@@ -386,16 +392,24 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                     <li>En cas de modification unilatérale par l’organisme de formation de l’un des éléments fixés à l’article IIb, l’entreprise se réserve le droit de mettre fin à la présente convention ; le délai d’annulation est toutefois limité à 15 jours francs avant la date prévue de commencement de l’action mentionnée à la présente convention.</li>
                 </p>
             </div>
+            </div>
             <br />
-            <div class="row cadre">
+
+
+
+
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE VI – REFERENCEMENT</div>
                 <p class="texte">
                     Le Client autorise le Prestataire et ses Intervenants désignés à la présente convention à inscrire les travaux convenus une fois accomplis au nombre de leurs références (nom du Client, logo du client, titre générique de la mission).
                 </p>
             </div>
+            </div>
             <br />
 
-            <div class="row cadre">
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE VII – CLAUSE DE PROTECTION DES DONNÉES PERSONNELLES</div>
                 <p class="texte">
                     Le client autorise l’organisme de formation à enregistrer ses données personnelles nécessaires au suivi de l’action de formation.
@@ -407,23 +421,32 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                     faire par mail à l’adresse suivante : contact@coheliance.com.
                 </p>
             </div>
+            </div>
             <br />
 
-            <div class="row cadre">
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE VIII – DIFFERENDS EVENTUELS</div>
                 <p class="texte">
                     Si une contestation ou un différend ne peuvent être réglés à l’amiable, le Tribunal de Dijon sera seul compétent pour régler le litige.
                 </p>
             </div>
+            </div>
             <br />
-            <div class="row cadre">
+            <div class="row">
+            <div class="col-12 cadre">
                 <div class="titre1">ARTICLE IV – DATE D’EFFET ET DUREE DE LA CONVENTION</div>
                 <p class="texte">
                     La présente convention prend effet à compter de sa signature par l’employeur pour la durée visée par l’article II.
                 </p>
             </div>
+            </div>
             <br />
+
+
+
             <div class="row">
+            <div class="col-12">
                 <table style="width:100%">
                     <tr><th colspan="2">Signatures pour accord</th></tr>
                     <tr>
@@ -475,6 +498,9 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                     </tr>
                 </table>
             </div>
+            </div>
+
+
 
         </div>
     </t>
@@ -483,5 +509,4 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
 
 
 
-</data>
 </odoo>

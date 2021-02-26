@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
 
 
 <template id="report_affaire">
@@ -17,7 +16,7 @@
 
             <style>
                 .titre{
-                    font-size:12pt;
+                    font-size:16pt;
                     font-weight: bold;
                     color:black;
                     border:1pt solid black;
@@ -28,10 +27,12 @@
                     border-collapse:collapse;
                 }
                 td{
+                    font-size:10pt;
                     border:1pt solid black;
                     padding:2pt;
                 }
                 th{
+                    font-size:10pt;
                     text-align:center;
                     border:1pt solid black;
                     background-color:#FF99FF;
@@ -44,7 +45,7 @@
                 .contrat h2{
                     margin-top:7pt;
                     margin-bottom:3pt;
-                    font-size:10pt;
+                    font-size:11pt;
                     font-weight: bold;
                     text-align: left;
                 }
@@ -58,7 +59,7 @@
                 .contrat h4{
                     margin-top:3pt;
                     margin-bottom:2pt;
-                    font-size:10pt;
+                    font-size:9pt;
                     text-align: left;
                     text-decoration: underline;
                 }
@@ -66,8 +67,14 @@
 
             </style>
 
-            <div class="row titre">CONTRAT DE PRESTATIONS n°<span t-field="o.name"/></div>
+            <div class="row titre">
+                <div class="col-12">
+                    CONTRAT DE PRESTATIONS n°<span t-field="o.name"/>
+                </div>
+            </div>
             <br />
+
+
 
             <div class="row">
                 <table style="width:100%">
@@ -133,6 +140,9 @@
             </div>
             <br />
 
+
+
+
             <t t-set="montant_ht"  t-value="o.total_budget_prevu" />
             <t t-set="tva"         t-value="o.article_id.taxes_id[0].amount" />
             <t t-set="montant_tva" t-value="montant_ht*tva" />
@@ -192,11 +202,11 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-6 text-center">
+                <div class="col-6 text-center">
                     Le client:<br />
                     date, nom et qualité du signataire, signature et cachet
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-6 text-center">
                     Le prestataire:<br />
                     date, nom et qualité du signataire, signature et cachet<br />
                     <span t-field="o.pilote_id.name"/>, <span t-field="o.pilote_id.partner_id.function"/><br />
@@ -229,17 +239,26 @@
                     </t>
 
 
-                    <!--<img t-att-src="'/is_coheliance/static/img/tampon-coheliance-formation.jpg'" style="max-height: 20mm;"/>-->
-
                 </div>
             </div>
-            <div class="row col-xs-12 text-center">
+
+
+
+
+
+            <div class="row col-12 text-center">
                 Fait à Dijon en double exemplaire,
                 Le <span t-field="o.date_signature"/>
             </div>
             <div style="page-break-before:always"/>
 
-            <div class="row contrat">
+
+
+
+
+
+            <div class="row">
+            <div class="col-12 contrat">
 <br />
 <h2>Contrat de prestation - Conditions Générales des Ventes</h2>
 
@@ -323,11 +342,11 @@ La convention de Vienne de 1980 relative aux contrats internationaux de vente de
 
 
                 </div>
+                </div>
     </t>
 </template>
 
 
 
 
-</data>
 </odoo>
