@@ -44,6 +44,7 @@ class AccountMove(models.Model):
     is_nom_fournisseur       = fields.Char('Nom du fournisseur')
     is_personne_concernee_id = fields.Many2one('res.users', u'Personne concernée')
     is_msg_err               = fields.Char('Message', compute='_compute', readonly=True)
+    supplier_invoice_number  = fields.Char('Numéro de facture fournisseur')
 
 
     def actualiser_affaire_sur_facture_action(self):

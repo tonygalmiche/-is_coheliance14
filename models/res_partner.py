@@ -5,20 +5,20 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    # @api.multi
-    # def open_partner_form_view(self):
-    #     dummy, view_id = self.env['ir.model.data'].get_object_reference('base', 'view_partner_form')
-    #     for partner in self:
-    #         return {
-    #         'name':_("Contacts"),
-    #         'view_mode': 'form',
-    #         'view_id': view_id,
-    #         'view_type': 'form',
-    #         'res_model': 'res.partner',
-    #         'type': 'ir.actions.act_window',
-    #         'res_id': partner.id,
-    #         'domain': '[]',
-    #     }
+
+    def open_partner_form_view(self):
+        dummy, view_id = self.env['ir.model.data'].get_object_reference('base', 'view_partner_form')
+        for partner in self:
+            return {
+                'name':"Contact",
+                'view_mode': 'form',
+                'view_id': view_id,
+                'view_type': 'form',
+                'res_model': 'res.partner',
+                'type': 'ir.actions.act_window',
+                'res_id': partner.id,
+                'domain': '[]',
+            }
 
 
     def _affaire_count(self):

@@ -301,7 +301,7 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                             <div class="titre3">Coût pédagogique :</div>
                             <table width="100%" class="cout" style="border:none">
                                 <t t-set="ht"   t-value="o.total_budget_prevu"/>
-                                <t t-set="taux" t-value="o.article_id.taxes_id[0].amount"/>
+                                <t t-set="taux" t-value="o.article_id.taxes_id and o.article_id.taxes_id[0].amount or 0"/>
                                 <t t-set="tva"  t-value="ht*taux"/>
                                 <t t-set="ttc"  t-value="ht+tva"/>
 
@@ -313,7 +313,7 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                                         <td>HT</td>
                                     </tr>
                                     <tr>
-                                        <td><span t-field="o.article_id.taxes_id[0].name" /></td>
+                                        <td><span t-field="o.article_id.taxes_id and o.article_id.taxes_id[0].name or 'TVA'" /></td>
                                         <td style="text-align:right"><span t-esc="tva"  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
                                         <td></td>
                                     </tr>
