@@ -66,9 +66,12 @@
                                     </group>
                                 </group>
                                 <group string="">
-                                    <field name="intitule" />
+                                    <label for="intitule" style="width:350px"/>
+                                    <div>
+                                        <field name="intitule" class="oe_inline"/>
+                                    </div>
                                     <field name="objectif" />
-                                    <field name="descriptif" />
+                                    <field name="descriptif" class="oe_inline"/>
                                     <field name="methode_pedagogique" />
                                     <field name="personnes_concernees" />
                                     <field name="lieu_intervention" />

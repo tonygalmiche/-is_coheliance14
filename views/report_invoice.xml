@@ -5,8 +5,15 @@
 
 <template id="is_report_invoice_document" name="is_report_invoice_document" inherit_id="account.report_invoice_document">
     <xpath expr="//div[@class='page']" position="replace">
+        <style>
+            .page{
+                line-height: 1.2;
+            }
+            .table th, .table td {
+                padding: 0.25rem;
+            }
+        </style>
         <div class="page">
-
             <div class="row">
                 <div class="col-7"/>
                 <div class="col-5">

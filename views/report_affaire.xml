@@ -12,60 +12,61 @@
 </template>
 <template id="report_affaire_document">
     <t t-call="web.external_layout">
+        <style>
+            .page {
+                line-height: 1.3;
+            }
+            .titre{
+                font-size:16pt;
+                font-weight: bold;
+                color:black;
+                border:1pt solid black;
+                text-align:center;
+            }
+            table{
+                border:1pt solid black;
+                border-collapse:collapse;
+            }
+            td{
+                font-size:10pt;
+                border:1pt solid black;
+                padding:1pt;
+            }
+            th{
+                font-size:10pt;
+                text-align:center;
+                border:1pt solid black;
+                background-color:#FF99FF;
+                padding:1pt;
+            }
+            .contrat{
+                font-size:8.5pt;
+                text-align: justify;
+            }
+            .contrat h2{
+                margin-top:7pt;
+                margin-bottom:3pt;
+                font-size:10pt;
+                font-weight: bold;
+                text-align: left;
+            }
+            .contrat h3{
+                margin-top:5pt;
+                margin-bottom:2pt;
+                font-size:10pt;
+                font-weight: bold;
+                text-align: left;
+            }
+            .contrat h4{
+                margin-top:3pt;
+                margin-bottom:2pt;
+                font-size:9pt;
+                text-align: left;
+                text-decoration: underline;
+            }
+        </style>
+
         <div class="page">
-
-            <style>
-                .titre{
-                    font-size:16pt;
-                    font-weight: bold;
-                    color:black;
-                    border:1pt solid black;
-                    text-align:center;
-                }
-                table{
-                    border:1pt solid black;
-                    border-collapse:collapse;
-                }
-                td{
-                    font-size:10pt;
-                    border:1pt solid black;
-                    padding:2pt;
-                }
-                th{
-                    font-size:10pt;
-                    text-align:center;
-                    border:1pt solid black;
-                    background-color:#FF99FF;
-                    padding:2pt;
-                }
-                .contrat{
-                    font-size:9pt;
-                    text-align: justify;
-                }
-                .contrat h2{
-                    margin-top:7pt;
-                    margin-bottom:3pt;
-                    font-size:11pt;
-                    font-weight: bold;
-                    text-align: left;
-                }
-                .contrat h3{
-                    margin-top:5pt;
-                    margin-bottom:2pt;
-                    font-size:10pt;
-                    font-weight: bold;
-                    text-align: left;
-                }
-                .contrat h4{
-                    margin-top:3pt;
-                    margin-bottom:2pt;
-                    font-size:9pt;
-                    text-align: left;
-                    text-decoration: underline;
-                }
-
-
-            </style>
 
             <div class="row titre">
                 <div class="col-12">
@@ -212,49 +213,43 @@
                     <span t-field="o.pilote_id.name"/>, <span t-field="o.pilote_id.partner_id.function"/><br />
 
                     <t t-if="o.pilote_id.login == 'jp.fiasson@coheliance.com'">
-                        <img t-att-src="'/is_coheliance/static/img/signature-jean-pierre-fiasson.png'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/signature-jean-pierre-fiasson.png'" style="max-height: 20mm;"/>
                     </t>
 
                     <t t-if="o.pilote_id.login == 'i.boltz@coheliance.com'">
-                        <img t-att-src="'/is_coheliance/static/img/signature-isabelle-boltz.png'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/signature-isabelle-boltz.png'" style="max-height: 20mm;"/>
                     </t>
 
                     <t t-if="o.pilote_id.login == 'o.laval@coheliance.com'">
-                        <img t-att-src="'/is_coheliance/static/img/signature-olivier-laval.png'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/signature-olivier-laval.png'" style="max-height: 20mm;"/>
                     </t>
 
                     <t t-if="o.pilote_id.login == 'f.monjournal@coheliance.com'">
-                        <img t-att-src="'/is_coheliance/static/img/signature-frederique-monjournal.jpg'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/signature-frederique-monjournal.jpg'" style="max-height: 20mm;"/>
                     </t>
 
                     <t t-if="o.pilote_id.login == 'patrice@coheliance.com'">
-                        <img t-att-src="'/is_coheliance/static/img/signature-patrice-fosset.jpg'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/signature-patrice-fosset.jpg'" style="max-height: 20mm;"/>
                     </t>
 
                     <t t-if="res_company.name == 'COHELIANCE'">
-                        <img t-att-src="'/is_coheliance/static/img/tampon-coheliance.png'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/tampon-coheliance.png'" style="max-height: 20mm;"/>
                     </t>
                     <t t-if="res_company.name != 'COHELIANCE'">
-                        <img t-att-src="'/is_coheliance/static/img/tampon-coheliance-formation.jpg'" style="max-height: 20mm;"/>
+                        <img t-att-src="'/is_coheliance14/static/img/tampon-coheliance-formation.jpg'" style="max-height: 20mm;"/>
                     </t>
 
 
                 </div>
             </div>
 
-
-
-
-
-            <div class="row col-12 text-center">
-                Fait à Dijon en double exemplaire,
-                Le <span t-field="o.date_signature"/>
+            <div class="row">
+                <div class="col-12 text-center">
+                    Fait à Dijon en double exemplaire,
+                    Le <span t-field="o.date_signature"/>
+                </div>
             </div>
             <div style="page-break-before:always"/>
-
-
-
-
 
 
             <div class="row">
