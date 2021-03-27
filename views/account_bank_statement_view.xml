@@ -3,7 +3,7 @@
     <data>
 
         <!-- Export en compta -->
-        <record id="export_compta_banque_action_server" model="ir.actions.server">
+        <!-- <record id="export_compta_banque_action_server" model="ir.actions.server">
              <field name="name">Export compta banque</field>
             <field name="model_id" ref="account.model_account_bank_statement"/>
             <field name="code">action = self.export_compta_banque_action(cr, uid, context.get('active_ids', []), context=context)</field>
@@ -13,6 +13,24 @@
             <field eval="'account.bank.statement'" name="model"/>
             <field name="name">Export compta banque</field>
             <field eval="'ir.actions.server,%d'%export_compta_banque_action_server" name="value"/>
-        </record>
+        </record> -->
+
+
+
+    <record id="export_compta_banque_action_server" model="ir.actions.server">
+        <field name="name">Export compta banque</field>
+        <field name="model_id" ref="account.model_account_bank_statement"/>
+        <field name="binding_model_id" ref="account.model_account_bank_statement"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">
+action = model.export_compta_banque_action()
+        </field>
+    </record>
+
+
     </data>
+
+
+
 </openerp>

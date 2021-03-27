@@ -31,6 +31,9 @@
                 font-size:10pt;
                 border:1pt solid black;
                 padding:1pt;
+                padding-left:5pt;
+                padding-right:5pt;
+
             }
             th{
                 font-size:10pt;
@@ -150,12 +153,11 @@
             <t t-set="montant_ttc" t-value="montant_ht*(1+tva)" />
             <div class="row">
                 <table style="width:100%">
-                    <tr><th colspan="2">Coût de la prestation</th></tr>
+
+                    <tr><th colspan="3">Coût de la prestation</th></tr>
                     <tr>
-                        <td width="50%">
-                            <span class="col-xs-8 text-left" >Coût total de la prestation HT :</span>
-                            <span class="col-xs-4 text-right"><t t-esc='montant_ht'  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></span>
-                        </td>
+                        <td width="35%" style="border-right:0">Coût total de la prestation HT :</td>         
+                        <td width="15%" style="border-left:0;text-align:right"><t t-esc='montant_ht'  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                         <td rowspan="3">
                             Modalités de paiement :<br />
                             <span t-field="o.modalite_paiement"/>
@@ -167,16 +169,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <span class="col-xs-8 text-left" >TVA (20%) :</span>
-                            <span class="col-xs-4 text-right"><t t-esc='montant_tva'  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></span>
-                        </td>
+                        <td style="border-right:0">TVA (20%) :</td>
+                        <td style="border-left:0;text-align:right"><t t-esc='montant_tva'  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                     </tr>
                     <tr>
-                        <td>
-                            <span class="col-xs-8 text-left" >Coût total de la prestation TTC  :</span>
-                            <span class="col-xs-4 text-right"><t t-esc='montant_ttc'  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></span>
-                        </td>
+                        <td style="border-right:0">Coût total de la prestation TTC  :</td>
+                        <td style="border-left:0;text-align:right"><t t-esc='montant_ttc'  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                     </tr>
                 </table>
             </div>
@@ -202,7 +200,7 @@
                 </table>
             </div>
 
-            <div class="row">
+            <div class="row" style="font-size:10pt;">
                 <div class="col-6 text-center">
                     Le client:<br />
                     date, nom et qualité du signataire, signature et cachet
@@ -243,7 +241,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="font-size:10pt;">
                 <div class="col-12 text-center">
                     Fait à Dijon en double exemplaire,
                     Le <span t-field="o.date_signature"/>

@@ -35,7 +35,10 @@
                             </field>
                         </group>
                         <group>
-                            <field name="vente_outil"/>
+                            <label for="vente_outil" style="width:450px"/>
+                            <div>
+                                <field name="vente_outil" class="oe_inline"/>
+                            </div>
                             <field name="sous_traitance"/>
                             <field name="heure_formation"/>
                             <field name="heure_formation_st"/>
@@ -50,7 +53,10 @@
                             </field>
                         </group>
                         <group>
-                            <field name="f2a_nb_stagiaire"/>
+                            <label for="f2a_nb_stagiaire" style="width:750px"/>
+                            <div>
+                                <field name="f2a_nb_stagiaire" class="oe_inline"/>
+                            </div>
                             <field name="f2a_heure_formation"/>
                             <field name="f2b_nb_stagiaire"/>
                             <field name="f2b_heure_formation"/>
@@ -65,7 +71,10 @@
                             </field>
                         </group>
                         <group>
-                            <field name="nb_stagiaire_autre"/>
+                            <label for="nb_stagiaire_autre" style="width:750px"/>
+                            <div>
+                                <field name="nb_stagiaire_autre" class="oe_inline"/>
+                            </div>
                             <field name="heure_formation_autre"/>
                         </group>
 

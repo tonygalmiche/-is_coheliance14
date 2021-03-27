@@ -23,7 +23,6 @@
             action="is_suivi_intervention_action"
         />
 
-        <!--
         <menuitem 
             name="Suivi associé" 
             id="is_suivi_refacturation_associe_menu" 
@@ -31,7 +30,6 @@
             sequence="20"  
             action="is_suivi_refacturation_associe_action"   
         />
-        -->
 
         <menuitem name="Analyses administratif" id="is_crm_analyses_administratif_menu" parent="is_crm_top_menu" sequence="50" />
         <menuitem 

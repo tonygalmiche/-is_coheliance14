@@ -3,7 +3,7 @@
 from . import product
 from . import res_partner
 from . import account_move
-# from . import account_bank_statement
+from . import account_bank_statement
 from . import is_coheliance
 from . import sale
 from . import is_suivi_tresorerie

@@ -37,6 +37,17 @@
                 <field name="street2" position="after">
                     <field name="is_bp" placeholder="Boite postale" attrs="{'readonly': [('parent_id','!=',False)]}" />
                 </field>
+
+                <field name="zip" position="replace"/>
+                <field name="city" position="before">
+                    <field name="zip" placeholder="Code postal" class="o_address_zip" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                </field>
+
+                <field name="state_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+
                 <field name="website" position="before">
                     <field name="is_region_id"/>
                 </field>

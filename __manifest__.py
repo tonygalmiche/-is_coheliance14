@@ -33,7 +33,7 @@ InfoSaône - Module Odoo 14 pour Coheliance
         "account_menu",
         "web_sheet_full_width",
         "journal_sequence",
-
+        "crm_phonecall",
     ],
     "init_xml" : [],
     "demo_xml" : [],
@@ -44,7 +44,7 @@ InfoSaône - Module Odoo 14 pour Coheliance
         "views/res_partner_view.xml", 
         "views/sale_view.xml",
         "views/account_move_view.xml",
-#        "views/account_bank_statement_view.xml",
+        "views/account_bank_statement_view.xml",
         "views/is_coheliance_view.xml",
         "views/is_coheliance_sequence.xml",
         "views/is_suivi_tresorerie_view.xml",
