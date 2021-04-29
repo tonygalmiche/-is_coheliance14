@@ -12,104 +12,121 @@
 </template>
 <template id="report_convention_document">
     <t t-call="web.external_layout">
+        <style>
+            .page{
+                font-size:10pt;
+            }
+            .titre{
+                font-size:12pt;
+                font-weight: bold;
+                color:black;
+                border:1pt solid black;
+                text-align:center;
+            }
+            .sous-titre{
+                font-size:10pt;
+                font-weight: bold;
+                text-align:center;
+            }
+            table{
+                border:1pt solid black;
+                border-collapse:collapse;
+            }
+            td{
+                font-size:10pt;
+                border:1pt solid black;
+                padding:1pt;
+                padding-left:5pt;
+                padding-right:5pt;
+
+            }
+            th{
+                font-size:10pt;
+                text-align:center;
+                border:1pt solid black;
+                background-color:#FF99FF;
+                padding:1pt;
+            }
+            .contrat{
+                font-size:8.5pt;
+                text-align: justify;
+            }
+            .contrat h2{
+                margin-top:7pt;
+                margin-bottom:3pt;
+                font-size:10pt;
+                font-weight: bold;
+                text-align: left;
+            }
+            .contrat h3{
+                margin-top:7pt;
+                margin-bottom:3pt;
+                font-size:9pt;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            .border-top{
+                border-top:1pt solid black;
+            }
+            .titre1{
+                font-weight: bold;
+                text-decoration :underline;
+                margin-top:2mm;
+                margin-bottom:2mm;
+            }
+            .titre2{
+                text-decoration :underline;
+                margin-left:0mm;
+                margin-top:5mm;
+                margin-bottom:2mm;
+            }
+            .titre3{
+                text-decoration :underline;
+                font-weight: bold;
+                margin-bottom:2mm;
+            }
+            .intitule{
+                text-align: center;
+                font-weight: bold;
+                margin-left:0mm;
+                margin-top:5mm;
+                margin-bottom:5mm;
+            }
+            .texte{
+                margin-top:1mm;
+                margin-bottom:3mm;
+            }
+
+            .cadre{
+                border:1pt solid black;
+                padding-bottom:3mm;
+                padding-left:3mm;
+                padding-right:5mm;
+            }
+            .cadre ul{
+                margin-left:5mm;
+            }
+            .cout td{
+                border-top:none;
+                border-right:none;
+                border-left:none;
+            }
+        </style>
+
         <div class="page">
 
-            <style>
-                .titre{
-                    font-size:12pt;
-                    font-weight: bold;
-                    color:black;
-                    border:1pt solid black;
-                    text-align:center;
-                }
-                .sous-titre{
-                    font-size:10pt;
-                    font-weight: bold;
-                    text-align:center;
-                }
-                table{
-                    border:1pt solid black;
-                    border-collapse:collapse;
-                }
-                td{
-                    border:1pt solid black;
-                    padding:2pt;
-                }
-                th{
-                    text-align:center;
-                    border:1pt solid black;
-                    background-color:#FF99FF;
-                    padding:2pt;
-                }
-                .contrat{
-                    font-size:8.5pt;
-                    text-align: justify;
-                }
-                .contrat h2{
-                    margin-top:7pt;
-                    margin-bottom:3pt;
-                    font-size:10pt;
-                    font-weight: bold;
-                    text-align: left;
-                }
-                .contrat h3{
-                    margin-top:7pt;
-                    margin-bottom:3pt;
-                    font-size:9pt;
-                    font-weight: bold;
-                    text-align: left;
-                }
 
-                .border-top{
-                    border-top:1pt solid black;
-                }
-                .titre1{
-                    font-weight: bold;
-                    text-decoration :underline;
-                    margin-top:2mm;
-                    margin-bottom:2mm;
-                }
-                .titre2{
-                    text-decoration :underline;
-                    margin-left:0mm;
-                    margin-top:5mm;
-                    margin-bottom:2mm;
-                }
-                .titre3{
-                    text-decoration :underline;
-                    font-weight: bold;
-                    margin-bottom:2mm;
-                }
-                .intitule{
-                    text-align: center;
-                    font-weight: bold;
-                    margin-left:0mm;
-                    margin-top:5mm;
-                    margin-bottom:5mm;
-                }
-                .texte{
-                    margin-top:1mm;
-                    margin-bottom:3mm;
-                }
-
-                .cadre{
-                    border:1pt solid black;
-                    padding-bottom:3mm;
-                    padding-left:3mm;
-                    padding-right:5mm;
-                }
-                .cadre ul{
-                    margin-left:5mm;
-                }
-                .cout td{
-                    border-top:none;
-                    border-right:none;
-                    border-left:none;
-                }
-            </style>
-
-            <div class="row titre">CONVENTION SIMPLIFIEE DE FORMATION PROFESSIONNELLE n°<span t-field="o.name"/></div>
-            <div class="row sous-titre">(art. L6353-1 et L6353-2 du Code du Travail)</div>
+            <div class="row titre">
+                <div class="col-12">
+                    CONVENTION SIMPLIFIEE DE FORMATION PROFESSIONNELLE n°<span t-field="o.name"/>
+                </div>
+            </div>
+            <div class="row sous-titre">
+                <div class="col-12">
+                    (art. L6353-1 et L6353-2 du Code du Travail)
+                </div>
+            </div>
             <div class="row">
                 <table style="width:100%">
                     <tr><th>                   </th><th>Le client       </th><th>Le prestataire  </th></tr>
@@ -152,9 +169,11 @@
             <div class="row border-top" /><br />
 
             <div class="row text-justify">
-                Entre le client et le prestataire ci-dessus désignés est conclue la convention suivante, en application des dispositions 
-                de la partie VI du Code du Travail portant organisation de la formation professionnelle continue dans le cadre de la 
-                formation professionnelle tout au long de la vie.
+                <div class="col-12">
+                    Entre le client et le prestataire ci-dessus désignés est conclue la convention suivante, en application des dispositions 
+                    de la partie VI du Code du Travail portant organisation de la formation professionnelle continue dans le cadre de la 
+                    formation professionnelle tout au long de la vie.
+                </div>
             </div>
             <br />
             <div class="row">
@@ -302,24 +321,24 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                             <table width="100%" class="cout" style="border:none">
                                 <t t-set="ht"   t-value="o.total_budget_prevu"/>
                                 <t t-set="taux" t-value="o.article_id.taxes_id and o.article_id.taxes_id[0].amount or 0"/>
-                                <t t-set="tva"  t-value="ht*taux"/>
+                                <t t-set="tva"  t-value="ht*taux/100"/>
                                 <t t-set="ttc"  t-value="ht+tva"/>
 
                                 <t t-if="taux != 0">
 
                                     <tr>
                                         <td>Coût total de la prestation HT :    </td>
-                                        <td style="text-align:right"><span t-esc="ht"  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+                                        <td style="text-align:right"><span t-esc="ht"  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                                         <td>HT</td>
                                     </tr>
                                     <tr>
-                                        <td><span t-field="o.article_id.taxes_id and o.article_id.taxes_id[0].name or 'TVA'" /></td>
-                                        <td style="text-align:right"><span t-esc="tva"  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+                                        <td><span t-esc="o.article_id.taxes_id and o.article_id.taxes_id[0].name or 'TVA'" /></td>
+                                        <td style="text-align:right"><span t-esc="tva"  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>Coût total de la prestation TTC :   </td>
-                                        <td style="text-align:right"><span t-esc="ttc"  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+                                        <td style="text-align:right"><span t-esc="ttc"  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                                         <td>TTC</td>
                                     </tr>
 
@@ -329,7 +348,7 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
 
                                     <tr>
                                         <td>Coût total de la prestation net de taxes :    </td>
-                                        <td style="text-align:right"><span t-esc="ht"  t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+                                        <td style="text-align:right"><span t-esc="ht"  t-options='{"widget": "monetary", "display_currency": (company_id or res_company).currency_id}'/></td>
                                         <td></td>
                                     </tr>
 
@@ -434,19 +453,18 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
             </div>
             <br />
             <div class="row">
-            <div class="col-12 cadre">
-                <div class="titre1">ARTICLE IV – DATE D’EFFET ET DUREE DE LA CONVENTION</div>
-                <p class="texte">
-                    La présente convention prend effet à compter de sa signature par l’employeur pour la durée visée par l’article II.
-                </p>
-            </div>
+                <div class="col-12 cadre">
+                    <div class="titre1">ARTICLE IV – DATE D’EFFET ET DUREE DE LA CONVENTION</div>
+                    <p class="texte">
+                        La présente convention prend effet à compter de sa signature par l’employeur pour la durée visée par l’article II.
+                    </p>
+                </div>
             </div>
             <br />
 
 
 
             <div class="row">
-            <div class="col-12">
                 <table style="width:100%">
                     <tr><th colspan="2">Signatures pour accord</th></tr>
                     <tr>
@@ -463,6 +481,10 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                                 <span t-field="o.pilote_id.name"/>, <span t-field="o.pilote_id.partner_id.function"/><br />
                                 Fait à Dijon en double exemplaire<br />
                                 Le <span t-field="o.date_signature" /><br />
+
+                                <t t-if="o.pilote_id.login == 'c.jacquier@coheliance.com'">
+                                    <img t-att-src="'/is_coheliance14/static/img/signature-clement-jacquier.jpg'" style="max-height: 20mm;"/>
+                                </t>
 
                                 <t t-if="o.pilote_id.login == 'jp.fiasson@coheliance.com'">
                                     <img t-att-src="'/is_coheliance/static/img/signature-jean-pierre-fiasson.png'" style="max-height: 20mm;"/>
@@ -497,7 +519,6 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                         </td>
                     </tr>
                 </table>
-            </div>
             </div>
 
 
