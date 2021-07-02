@@ -10,7 +10,8 @@ def _get_annee():
 
 
 def _date_creation():
-    now  = datetime.date.today()
+    now  = date.today()
+    print(now)
     return now.strftime('%Y-%m-%d')
 
 
@@ -392,11 +393,11 @@ class is_frais(models.Model):
     _order='name desc'
 
     name             = fields.Char(u"Numéro")
-    date_creation    = fields.Date(u"Date de création")
+    date_creation    = fields.Date(u"Date de création", default=lambda self: fields.Datetime.now())
     affaire_id       = fields.Many2one('is.affaire', 'Affaire', required=True)
-    intervenant_id   = fields.Many2one('res.users', u'Associé')
+    intervenant_id   = fields.Many2one('res.users', u'Associé',  default=lambda self: self.env.user)
     sous_traitant_id = fields.Many2one('res.partner', u'Sous-Traitant')
-    taux_km          = fields.Float(u"Taux indemnité kilométrique")
+    taux_km          = fields.Float(u"Taux indemnité kilométrique",  default=lambda self: self._taux_km(self._cr))
     ligne_ids        = fields.One2many('is.frais.ligne', 'frais_id', u'Lignes')
 
 
@@ -409,12 +410,12 @@ class is_frais(models.Model):
         return taux_km
 
 
-    _defaults = {
-        'name': '',
-        'intervenant_id': lambda obj, cr, uid, context: uid,
-        'date_creation': lambda *a: _date_creation(),
-        'taux_km': lambda self, cr, uid, context: self._taux_km(cr),
-    }
+    # _defaults = {
+    #     'name': '',
+    #     'intervenant_id': lambda obj, cr, uid, context: uid,
+    #     'date_creation': lambda *a: _date_creation(),
+    #     'taux_km': lambda self, cr, uid, context: self._taux_km(cr),
+    # }
 
 
     @api.model
@@ -508,18 +509,18 @@ class is_fiche_frais(models.Model):
 
 
     def _date_debut(self):
-        now  = datetime.date.today()              # Ce jour
+        now  = date.today()              # Ce jour
         j    = now.day                            # Numéro du jour dans le mois
-        d    = now - datetime.timedelta(days=j)   # Dernier jour du mois précédent
+        d    = now - timedelta(days=j)   # Dernier jour du mois précédent
         j    = d.day                              # Numéro jour mois précédent
-        d    = d - datetime.timedelta(days=(j-1)) # Premier jour du mois précédent
+        d    = d - timedelta(days=(j-1)) # Premier jour du mois précédent
         return d.strftime('%Y-%m-%d')
 
 
     def _date_fin(self):
-        now  = datetime.date.today()            # Ce jour
+        now  = date.today()            # Ce jour
         j    = now.day                          # Numéro du jour dans le mois
-        d    = now - datetime.timedelta(days=j) # Dernier jour du mois précédent
+        d    = now - timedelta(days=j) # Dernier jour du mois précédent
         return d.strftime('%Y-%m-%d')
 
 
