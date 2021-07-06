@@ -11,7 +11,6 @@ def _get_annee():
 
 def _date_creation():
     now  = date.today()
-    print(now)
     return now.strftime('%Y-%m-%d')
 
 
@@ -289,6 +288,7 @@ class is_affaire_intervention(models.Model):
         return montant
 
 
+    @api.depends('unite_temps','temps_passe','facturable','nb_stagiaire')
     def _montant_facture(self):
         for obj in self:
             montant = 0
@@ -297,6 +297,7 @@ class is_affaire_intervention(models.Model):
             obj.montant_facture = montant
 
 
+    @api.depends('unite_temps','temps_passe','facturable','nb_stagiaire')
     def _montant_non_facturable(self):
         for obj in self:
             montant = 0
@@ -305,6 +306,7 @@ class is_affaire_intervention(models.Model):
             obj.montant_non_facturable = montant
 
 
+    @api.depends('unite_temps','temps_passe','facturable','nb_stagiaire')
     def _temps_formation(self):
         for obj in self:
             taux=0
