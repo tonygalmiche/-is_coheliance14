@@ -43,9 +43,9 @@
 
             <table class="table table-condensed">
                 <tr>
-                    <td t-if="o.order_id">
+                    <td t-if="o.is_affaire_id">
                         <strong>Affaire:</strong><br />
-                        <p t-field="o.order_id.affaire_id.name"/>
+                        <p t-field="o.is_affaire_id.name"/>
                     </td>
                     <td t-if="o.name">
                         <strong>Description:</strong><br />
