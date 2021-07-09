@@ -235,6 +235,7 @@
             <field name="arch" type="xml">
                 <field name="display_name" position="after">
                     <field name="is_prenom"/>
+                    <field name="title" optional="hide"/>
                     <field name="function"/>
                     <field name="is_classification_id"/>
                     <field name="mobile"/>
@@ -258,6 +259,7 @@
                 <tree>
                     <field name="display_name"/>
                     <field name="is_prenom"/>
+                    <field name="title" optional="hide"/>
                     <field name="function"/>
                     <field name="is_classification_id"/>
                     <field name="mobile"/>
