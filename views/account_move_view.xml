@@ -73,7 +73,8 @@
             <field name="inherit_id" ref="account.view_account_invoice_filter" />
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="is_nom_fournisseur" />
+                    <field name="supplier_invoice_number"/>
+                    <field name="is_nom_fournisseur"/>
                     <field name="is_affaire_id"/>
                     <field name="is_refacturable"/> 
                 </field>
