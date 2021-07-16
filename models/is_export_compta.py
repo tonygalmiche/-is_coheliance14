@@ -57,9 +57,9 @@ class is_export_compta(models.Model):
                 if obj.date_fin:
                     filter.append(('invoice_date', '<=', obj.date_fin))
                 if obj.num_debut:
-                    filter.append(('number', '>=', obj.num_debut))
+                    filter.append(('name', '>=', obj.num_debut))
                 if obj.num_fin:
-                    filter.append(('number', '<=', obj.num_fin))
+                    filter.append(('name', '<=', obj.num_fin))
                 invoices = self.env['account.move'].search(filter, order="invoice_date,id")
                 if len(invoices)==0:
                     raise Warning('Aucune facture à traiter')
