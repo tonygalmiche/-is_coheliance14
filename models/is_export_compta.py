@@ -109,7 +109,7 @@ class is_export_compta(models.Model):
                         nom_fournisseur=row[7]
                         if nom_fournisseur==None:
                             nom_fournisseur=row[3]
-                        libelle=nom_fournisseur+u' - '+row[4]
+                        libelle=nom_fournisseur+' - '+(row[4] or '')
                         compte=str(row[1])
                         if obj.type_interface=='achats' and compte=='401100':
                             compte=str(row[6])
