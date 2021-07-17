@@ -17,11 +17,12 @@ class AccountMove(models.Model):
                 ('partner_id'  , '=' , obj.partner_id.id),
             ]
             invoices = self.env['account.move'].search(filter)
-            print('TEST',obj,invoices)
             msg=False
             if len(invoices)>1:
                 msg='Attention : Il existe une autre facture du même montant à cette même date et pour ce même fournisseur'
             obj.is_msg_err=msg
+        return
+
 
     @api.depends('invoice_line_ids','state')
     def _compute_order_id(self):
@@ -32,10 +33,12 @@ class AccountMove(models.Model):
                     affaire_id = order.order_id.affaire_id.id
                     if affaire_id:
                         obj.is_affaire_id=affaire_id
-                        line.is_affaire_id=affaire_id
-                    
-            for line in obj.invoice_line_ids:
-                line.is_affaire_id=obj.is_affaire_id.id
+            if obj.is_affaire_id:
+                for line in obj.invoice_line_ids:
+                    if not line.is_affaire_id:
+                        line.is_affaire_id=obj.is_affaire_id.id
+        return
+
 
 
     order_id                 = fields.Many2one('sale.order', 'Commande', compute=_compute_order_id,store=True)
@@ -47,18 +50,18 @@ class AccountMove(models.Model):
     supplier_invoice_number  = fields.Char('Numéro de facture fournisseur')
 
 
-    def actualiser_affaire_sur_facture_action(self):
-        for obj in self:
-            if obj.order_id and not obj.is_affaire_id:
-                obj.is_affaire_id = obj.order_id.affaire_id
+    # def actualiser_affaire_sur_facture_action(self):
+    #     for obj in self:
+    #         if obj.order_id and not obj.is_affaire_id:
+    #             obj.is_affaire_id = obj.order_id.affaire_id
 
 
-    def actualiser_affaire_sur_ligne_action(self):
-        for obj in self:
-            if obj.is_affaire_id:
-                for line in obj.invoice_line:
-                    if not line.is_affaire_id:
-                        line.is_affaire_id = obj.is_affaire_id.id
+    # def actualiser_affaire_sur_ligne_action(self):
+    #     for obj in self:
+    #         if obj.is_affaire_id:
+    #             for line in obj.invoice_line:
+    #                 if not line.is_affaire_id:
+    #                     line.is_affaire_id = obj.is_affaire_id.id
 
 
     def voir_facture_fournisseur(self):

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <!-- Facture client -->
         <record model="ir.ui.view" id="is_view_move_form">
             <field name="name">is_view_move_form</field>
