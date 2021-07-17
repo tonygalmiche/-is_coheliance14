@@ -461,7 +461,7 @@ class is_frais_ligne(models.Model):
             if obj.type_frais_id:
                 if obj.type_frais_id.taxes_id:
                     for taxe in obj.type_frais_id.taxes_id:
-                        tva=taxe.amount
+                        tva=taxe.amount/100
             obj.montant_ttc=obj.montant_ht*(1+tva)
 
 

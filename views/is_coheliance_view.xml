@@ -148,7 +148,10 @@
                             <page string="Frais associés">
                                 <button name="action_detail_frais" type="object" string="Détail des frais"/>
                                 <group>
-                                    <field name="frais_ids" nolabel="1" context="{'default_affaire_id': id}">
+                                    <field name="frais_ids" nolabel="1" context="{'default_affaire_id': active_id}">
+
+
+
                                         <tree string="Frais">
                                             <button title="Imprimer la fiche de frais" name="print_fiche_frais" type="object" icon="fa-print" />
                                             <field name="name"/>
@@ -157,6 +160,34 @@
                                             <field name="sous_traitant_id"/>
                                             <field name="taux_km"/>
                                         </tree>
+                                        <form>
+                                            <sheet>
+                                                <group>
+                                                    <group>
+                                                        <field name="name" readonly="1" />
+                                                        <field name="intervenant_id" />
+                                                        <field name="sous_traitant_id" />
+                                                    </group>
+                                                    <group>
+                                                        <field name="date_creation" />
+                                                        <field name="taux_km"/>
+                                                    </group>
+                                                </group>
+                                                <group string="">
+                                                    <field name="ligne_ids" nolabel="1">
+                                                        <tree string="Lignes" editable="bottom">
+                                                            <field name="date"/>
+                                                            <field name="type_frais_id" domain="[('is_type_frais','=',True)]"/>
+                                                            <field name="refacturable"/>
+                                                            <field name="km"/>
+                                                            <field name="montant_ht"/>
+                                                            <field name="montant_ttc" readonly="1"/>
+                                                            <field name="commentaire"/>
+                                                        </tree>
+                                                    </field>
+                                                </group>
+                                            </sheet>
+                                        </form>
                                     </field>
                                 </group>
                             </page>
