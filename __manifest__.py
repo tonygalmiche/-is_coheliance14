@@ -57,6 +57,7 @@ InfoSaône - Module Odoo 14 pour Coheliance
         "views/is_suivi_caisse_view.xml",
         "views/layouts.xml",
 #        "views/layouts-convention.xml",
+        "views/sale_report_templates.xml",
         "views/report_affaire.xml",
         "views/report_convention.xml",
         "views/report_convention_st.xml",
