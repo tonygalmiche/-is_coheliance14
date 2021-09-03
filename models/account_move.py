@@ -9,7 +9,7 @@ class AccountMove(models.Model):
 
 
     @api.depends('invoice_date','amount_total','partner_id')
-    def _compute(self):
+    def _compute_is_msg_err(self):
         for obj in self:
             filter=[
                 ('invoice_date', '=' , obj.invoice_date),
@@ -21,7 +21,7 @@ class AccountMove(models.Model):
             if len(invoices)>1:
                 msg='Attention : Il existe une autre facture du même montant à cette même date et pour ce même fournisseur'
             obj.is_msg_err=msg
-        return
+        #return
 
 
     @api.depends('invoice_line_ids','state')
@@ -37,7 +37,7 @@ class AccountMove(models.Model):
                 for line in obj.invoice_line_ids:
                     if not line.is_affaire_id:
                         line.is_affaire_id=obj.is_affaire_id.id
-        return
+        #return
 
 
 
@@ -46,7 +46,7 @@ class AccountMove(models.Model):
     is_refacturable          = fields.Selection([('oui','Oui'),('non','Non')], u"Refacturable")
     is_nom_fournisseur       = fields.Char('Nom du fournisseur')
     is_personne_concernee_id = fields.Many2one('res.users', u'Personne concernée')
-    is_msg_err               = fields.Char('Message', compute='_compute', readonly=True)
+    is_msg_err               = fields.Char('Message', compute='_compute_is_msg_err', readonly=True)
     supplier_invoice_number  = fields.Char('Numéro de facture fournisseur')
 
 
@@ -96,6 +96,13 @@ class AccountMoveLine(models.Model):
 
     is_affaire_id = fields.Many2one('is.affaire', 'Affaire')
     is_account_invoice_line_id = fields.Integer('Lien entre account_invoice_line et account_move_line pour la migration')
+
+
+    # def write(self, values):
+    #     print(self,values)
+    #     res = super().write(values)
+    #     return res
+
 
 
     # def product_id_change(self, product, uom_id, qty=0, name='', type='out_invoice',
