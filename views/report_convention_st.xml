@@ -102,13 +102,12 @@
                     border-right:none;
                     border-left:none;
                 }
-
-
-
-
             </style>
-
-            <div class="row titre">CONTRAT DE SOUS-TRAITANCE n°<span t-field="o.affaire_id.name"/></div>
+            <div class="row titre">
+                <div class="col-12">
+                    CONTRAT DE SOUS-TRAITANCE n°<span t-field="o.affaire_id.name"/>
+                </div>
+            </div>
             <div class="text-center">(art L6353-1 du Code du Travail)</div>
             <br />
             <div class="row">
@@ -477,11 +476,17 @@
                         </td>
                     </tr>
                 </table>
-                <p class="texte" style="text-align:center">
-                    Fait à Dijon en double exemplaire<br />
-                    Le <span t-field="o.affaire_id.date_signature" />
-                </p>
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <p class="texte" style="text-align:center">
+                        Fait à Dijon en double exemplaire<br />
+                        Le <span t-field="o.affaire_id.date_signature" />
+                    </p>
+                </div>
+            </div>
+
             <div style="page-break-before:always"/>
             <div class="row">
                 <table style="width:100%">
