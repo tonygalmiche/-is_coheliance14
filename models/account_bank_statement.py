@@ -8,15 +8,11 @@ class account_bank_statement(models.Model):
 
     def export_compta_banque_action(self):
         for obj in self.browse(self.env.context['active_ids']):
-
-            print(obj)
-
             vals={
                 'type_interface': 'banque',
             }
             export = self.env['is.export.compta'].create(vals)
             for line in obj.line_ids:
-                print(line)
                 debit  = 0
                 credit = 0
                 if line.amount<0:
@@ -28,7 +24,8 @@ class account_bank_statement(models.Model):
                     'date_facture'      : line.date,
                     'journal'           : 'BANQUE',
                     'compte'            : line.partner_id.is_code_fournisseur or False,
-                    'libelle'           : line.name,
+                    'libelle'           : line.payment_ref,
+#                    'libelle'           : line.name,
 #                    'affaire'           : affaire,
                     'debit'             : debit,
                     'credit'            : credit,
