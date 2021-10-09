@@ -28,6 +28,7 @@ class IsAffaire(models.Model):
             obj.ecart_budget = obj.budget_propose-total
 
 
+    @api.depends('intervention_ids')
     def _nb_stagiaire(self):
         for obj in self:
             nb_stagiaire=0
