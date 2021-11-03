@@ -143,7 +143,7 @@ class is_bilan_pedagogique(models.Model):
             for type_stagiaire in type_stagiaires:
                 # nb_stagiaire
                 sql="""
-                    select ia.id, max(ia.nb_stagiaire)
+                    select ia.id, max(ia.nb_stagiaire), max(ia.nb_stagiaire_visio)
                     from is_affaire_intervention iai inner join is_affaire ia on iai.affaire_id=ia.id
                                                      inner join product_template pt on ia.article_id=pt.id
                     where iai.date>='"""+str(obj.name)+"""-01-01' and 
@@ -156,10 +156,12 @@ class is_bilan_pedagogique(models.Model):
                     sql=sql+" and ia.type_stagiaire_organisme_id is null "
                 sql=sql+"group by ia.id"
                 cr.execute(sql)
-                nb_stagiaire=0
+                nb_stagiaire       = 0
+                nb_stagiaire_visio = 0
                 for row in cr.fetchall():
                     if row[1]:
-                        nb_stagiaire=nb_stagiaire+row[1]
+                        nb_stagiaire       += row[1]
+                        nb_stagiaire_visio += row[2]
 
                 # nb_heure
                 sql="""
@@ -181,9 +183,10 @@ class is_bilan_pedagogique(models.Model):
                         nb_heure     = row[0]
                 vals={
                     'bilan_id'     : obj.id,
-                    'type_stagiaire_organisme_id' : type_stagiaire,
-                    'nb_stagiaire' : nb_stagiaire ,
-                    'nb_heure'     : nb_heure,
+                    'type_stagiaire_organisme_id': type_stagiaire,
+                    'nb_stagiaire'               : nb_stagiaire ,
+                    'nb_stagiaire_visio'         : nb_stagiaire_visio ,
+                    'nb_heure'                   : nb_heure,
                 }
                 self.env['is.bilan.pedagogique.type.stagiaire'].create(vals)
 
@@ -378,6 +381,7 @@ class is_bilan_pedagogique_type_stagiaire(models.Model):
     bilan_id                    = fields.Many2one('is.bilan.pedagogique', string='Bilan Pédagogique')
     type_stagiaire_organisme_id = fields.Many2one('is.type.stagiaire.organisme', string="Type de stagiaire de l'organisme")
     nb_stagiaire                = fields.Float("Nombre de stagiaires")
+    nb_stagiaire_visio          = fields.Float("Nombre de stagiaires en visio")
     nb_heure                    = fields.Float("Nombre total d'heures de formation suivies par l'ensemble des stagiaires")
 
 

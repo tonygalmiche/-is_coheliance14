@@ -32,10 +32,17 @@ class IsAffaire(models.Model):
     def _nb_stagiaire(self):
         for obj in self:
             nb_stagiaire=0
+            visio = False
             for intervention in obj.intervention_ids:
+                if intervention.visio:
+                    visio=True
                 if intervention.nb_stagiaire>nb_stagiaire:
                     nb_stagiaire=intervention.nb_stagiaire
             obj.nb_stagiaire = nb_stagiaire
+            nb_stagiaire_visio = 0
+            if visio:
+                nb_stagiaire_visio = nb_stagiaire
+            obj.nb_stagiaire_visio = nb_stagiaire_visio
 
 
     @api.depends('intervenant_ids')
@@ -126,7 +133,8 @@ class IsAffaire(models.Model):
     date_solde = fields.Date("Date annulé ou soldé", copy=False)
     order_id = fields.Many2one('sale.order', 'Commande', readonly=False, copy=False)
     origine_financement_id = fields.Many2one('is.origine.financement', 'Origine du financement')
-    nb_stagiaire = fields.Integer(compute=_nb_stagiaire, string="Nombre de stagiaires", store=True, )
+    nb_stagiaire       = fields.Integer(compute=_nb_stagiaire, string="Nombre de stagiaires"         , store=True, )
+    nb_stagiaire_visio = fields.Integer(compute=_nb_stagiaire, string="Nombre de stagiaires en visio", store=True, )
     type_stagiaire_organisme_id = fields.Many2one('is.type.stagiaire.organisme', "Type de stagiaire de l'organisme")
     typologie_stagiaire_id = fields.Many2one('is.typologie.stagiaire', 'Objectif général des prestations dispensées')
     intervention_ids = fields.One2many('is.affaire.intervention', 'affaire_id', 'Interventions')
@@ -328,6 +336,7 @@ class is_affaire_intervention(models.Model):
     unite_temps            = fields.Selection([('heure','Heure'),('demi-jour','Demi-journée'),('jour','Jour')], "Unité de temps", default="heure", required=True)
     nb_stagiaire           = fields.Integer("Nombre de stagiaires")
     temps_formation        = fields.Float(compute=_temps_formation, string="Temps de formation", store=True, )
+    visio                  = fields.Boolean("Visio", default=False)
     facturable             = fields.Boolean("Facturable", default=True)
     montant_facture        = fields.Float(compute=_montant_facture, string="Montant à facturer", store=True)
     montant_non_facturable = fields.Float(compute=_montant_non_facturable, string="Montant non facturable", store=True)

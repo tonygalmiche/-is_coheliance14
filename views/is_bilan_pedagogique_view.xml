@@ -47,8 +47,9 @@
                             <field name="type_stagiaire_ids">
                                 <tree editable="top">
                                     <field name="type_stagiaire_organisme_id" />
-                                    <field name="nb_stagiaire"  sum="Total"/>
-                                    <field name="nb_heure"      sum="Total"/>
+                                    <field name="nb_stagiaire"       sum="Total"/>
+                                    <field name="nb_stagiaire_visio" sum="Total"/>
+                                    <field name="nb_heure"           sum="Total"/>
                                 </tree>
                             </field>
                         </group>

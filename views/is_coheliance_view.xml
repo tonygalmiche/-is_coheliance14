@@ -23,7 +23,11 @@
                     <field name="origine_financement_id"      invisible="context.get('formation',True)"/>
                     <field name="type_stagiaire_organisme_id" invisible="context.get('formation',True)"/>
                     <field name="typologie_stagiaire_id"      invisible="context.get('formation',True)"/>
-                    <field name="resultat_net" sum="Total"/>
+                    <field name="resultat_net"       sum="Total"/>
+                    <field name="nb_stagiaire"       sum="Total" optional="hide"/>
+                    <field name="nb_stagiaire_visio" sum="Total" optional="hide"/>
+
+
                     <field name="state" />
                 </tree>
             </field>
@@ -118,6 +122,7 @@
                                             <field name="unite_temps" />
                                             <field name="nb_stagiaire" />
                                             <field name="temps_formation" sum="Total" />
+                                            <field name="visio"/>
                                             <field name="facturable"/>
                                             <field name="montant_facture"        sum="Total" readonly="1"/>
                                             <field name="montant_non_facturable" sum="Total" readonly="1"/>
@@ -127,6 +132,7 @@
                                 </group>
                                 <group>
                                     <field name="nb_stagiaire"/>
+                                    <field name="nb_stagiaire_visio"/>
                                 </group>
                             </page>
                             <page string="Ventes">

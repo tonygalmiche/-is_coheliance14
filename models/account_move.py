@@ -4,6 +4,12 @@ import time
 from odoo import api, fields, models
 
 
+class AccountAccount(models.Model):
+    _inherit = 'account.account'
+
+    is_responsable_id = fields.Many2one('res.users', 'Responsable')
+
+
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
@@ -94,7 +100,9 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    is_affaire_id = fields.Many2one('is.affaire', 'Affaire')
+
+    is_responsable_id          = fields.Many2one('res.users', 'Responsable', related='account_id.is_responsable_id', readonly=True)
+    is_affaire_id              = fields.Many2one('is.affaire', 'Affaire')
     is_account_invoice_line_id = fields.Integer('Lien entre account_invoice_line et account_move_line pour la migration')
 
 
