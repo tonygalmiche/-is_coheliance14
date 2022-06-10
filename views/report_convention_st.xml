@@ -500,10 +500,10 @@
                                 les démarches suivantes auprès de <span t-field="res_company.name"/> :</div>
 
                                 <ul>
-                                    <li>Fournir la copie de sa déclaration d’activité de formateur (le document ne sera demandé qu’une seule fois, le numéro sera ensuite clairement indiqué dans la convention de sous-traitance)</li>
-                                    <li>Retourner un exemplaire de la convention de sous-traitance dûment signé</li>
+                                    <li>Fournir la copie de sa déclaration d’activité de formateur (le document ne sera demandé qu’une seule fois, le numéro sera ensuite clairement indiqué dans la convention de sous-traitance) ainsi qu'un CM mis à jour (détaillant le parcours de formation individuel)</li>
+                                    <li>Retourner un exemplaire de la convention de sous-traitance dûment signé ainsi que la charte qualité signée</li>
                                     <li>Prévenir, minimum 15 jours avant le démarrage de l’action, de ses besoins en matériel pédagogique (vidéoprojecteur, caméra…) et en documentation ou support pédagogique (pour reprographie)</li>
-                                    <li>Faire parvenir son déroulé pédagogique (dans lequel figurent les pré-requis de la formation, les objectifs généraux et, pour chaque étape de la formation, l’objectif pédagogique recherché) et le questionnaire d’auto-évaluation complété (selon le modèle Evaluation des Acquis joint en annexe)</li>
+                                    <li>Faire parvenir son déroulé pédagogique (dans lequel figurent les pré-requis de la formation, les objectifs généraux et, pour chaque étape de la formation, l’objectif pédagogique recherché) et le questionnaire d'évaluation des acquis</li>
                                 </ul>
 
 
@@ -517,9 +517,9 @@
                                 <div class="titre1">A la fin de la formation, le sous-traitant devra :</div>
                                 <ul>
                                 <li>Signer et faire signer les feuilles de présence aux participants </li>
-                                <li>Faire remplir le questionnaire d’auto-évaluation (Evaluation des acquis) et le signer</li>
-                                <li>Faire remplir la fiche d’évaluation</li>
-                                <li>Remettre aux stagiaires les attestations de fin de formation en leur indiquant qu’une copie de l’évaluation des acquis leur sera remise dans un second temps par mail (mail personnel)</li>
+                                <li>Faire remplir le questionnaire d'évaluation des acquis et le signer</li>
+                                <li>Faire remplir la fiche d'évaluation de la formation et du formateur</li>
+                                <li>Remettre aux participants les attestations de fin de formation en leur indiquant qu’une copie de l’évaluation des acquis leur sera remise dans un second temps par mail (mail personnel)</li>
                                 </ul>
 
                                 <div class="titre1">Récupérer les documents 1-2-3 afin de les envoyer à <span t-field="res_company.name"/>.</div>
