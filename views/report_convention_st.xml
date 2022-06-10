@@ -186,7 +186,9 @@
             <br />
             <div class="row border-top" /><br />
             <div class="row text-justify">
-                Entre le prestataire et le sous-traitant ci-dessus désignés est conclu le contrat suivant :
+                <div class="col-12">
+                    Entre le prestataire et le sous-traitant ci-dessus désignés est conclu le contrat suivant :
+                </div>
             </div>
             <br />
             <div class="row">
