@@ -19,8 +19,10 @@ class is_suivi_intervention(models.Model):
     sous_traitant_id    = fields.Many2one('res.partner', u'Sous-Traitant')
     temps_passe         = fields.Float(u"Temps passé")
     unite_temps         = fields.Selection([('heure','Heure'),('demi-jour','Demi-journée'),('jour','Jour')], u"Unité de temps")
+    temps_passe_heure   = fields.Float(string="Temps passé (H)")
     montant_facture     = fields.Float('Montant à facturer')
     commentaire         = fields.Text(u"Commentaire")
+
 
     def init(self):
         cr=self.env.cr
@@ -38,6 +40,7 @@ class is_suivi_intervention(models.Model):
                     iai.sous_traitant_id,
                     iai.temps_passe,
                     iai.unite_temps,
+                    iai.temps_passe_heure,
                     iai.montant_facture,
                     iai.commentaire,
                     rp.is_secteur_activite_id secteur_activite_id ,

@@ -13,4 +13,5 @@ from . import is_compte_resultat
 from . import is_bilan_pedagogique
 from . import is_suivi_banque
 from . import is_suivi_caisse
+from . import crm_lead
 

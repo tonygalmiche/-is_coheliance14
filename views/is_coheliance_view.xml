@@ -115,18 +115,19 @@
                                 <group string="">
                                     <field name="intervention_ids" nolabel="1">
                                         <tree string="Interventions" editable="bottom">
-                                            <field name="date"/>
-                                            <field name="associe_id"/>
-                                            <field name="sous_traitant_id"/>
-                                            <field name="temps_passe"/>
-                                            <field name="unite_temps" />
-                                            <field name="nb_stagiaire" />
-                                            <field name="temps_formation" sum="Total" />
-                                            <field name="visio"/>
-                                            <field name="facturable"/>
-                                            <field name="montant_facture"        sum="Total" readonly="1"/>
-                                            <field name="montant_non_facturable" sum="Total" readonly="1"/>
-                                            <field name="commentaire"/>
+                                            <field name="date"                   optional="show"/>
+                                            <field name="associe_id"             optional="show"/>
+                                            <field name="sous_traitant_id"       optional="show"/>
+                                            <field name="temps_passe"            optional="show"/>
+                                            <field name="unite_temps"            optional="show" />
+                                            <field name="temps_passe_heure"      optional="show" sum="Total"/>
+                                            <field name="nb_stagiaire"           optional="show" />
+                                            <field name="temps_formation"        optional="show" sum="Total"/>
+                                            <field name="visio"                  optional="show"/>
+                                            <field name="facturable"             optional="show"/>
+                                            <field name="montant_facture"        optional="show"        sum="Total" readonly="1"/>
+                                            <field name="montant_non_facturable" optional="show" sum="Total" readonly="1"/>
+                                            <field name="commentaire"            optional="show"/>
                                         </tree>
                                     </field>
                                 </group>

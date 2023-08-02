@@ -46,32 +46,34 @@
                                         <th>Affaire</th>
                                         <th>Commentaire</th>
                                         <th>Distance (Km)</th>
+                                        <th>Montant</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <t t-set="total" t-value="0"/>
+                                    <t t-set="total_km" t-value="0"/>
+                                    <t t-set="total_montant" t-value="0"/>
                                     <tr t-foreach="o.get_frais()" t-as="f">
-                                        <t t-set="total"   t-value="total + f.km"/>
+                                        <t t-set="total_km"      t-value="total_km + f.km"/>
+                                        <t t-set="total_montant" t-value="total_montant + f.km*0.4"/>
                                         <td><span t-field="f.date"/></td>
                                         <td><span t-field="f.affaire_id.client_id.name"/></td>
                                         <td><span t-field="f.affaire_id.name"/></td>
                                         <td><span t-field="f.commentaire"/></td>
                                         <td style="text-align:center"><span t-field="f.km"/></td>
+                                        <td style="text-align:center"><span t-esc="round(f.km*0.4,2)"/></td>
                                     </tr>
                                 </tbody>
                                 <thead>
                                     <tr>
-                                        <th style="text-align:right" colspan="4">Total Km : </th>
-                                        <th style="text-align:center"><span t-esc="total"/></th>
+                                        <th style="text-align:right" colspan="4">Total : </th>
+                                        <th style="text-align:center"><span t-esc="total_km"/></th>
+                                        <th style="text-align:center"><span t-esc="round(total_montant,2)"/></th>
                                     </tr>
-                                    <t t-set="montant" t-value="total * 0.4"/>
-                                    <tr>
+                                    <!-- <tr>
                                         <th style="text-align:right" colspan="4">Indemnités kilométriques (0.4€/Km) : </th>
-                                        <th style="text-align:center"><span t-esc="montant"/></th>
-                                    </tr>
-
+                                        <th style="text-align:center"><span t-esc="total_montant"/></th>
+                                    </tr> -->
                                 </thead>
-
                             </table>
                         </div>
                     </div>

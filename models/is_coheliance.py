@@ -328,12 +328,27 @@ class is_affaire_intervention(models.Model):
             obj.temps_formation = obj.temps_passe*obj.nb_stagiaire*taux
 
 
+
+    @api.depends('temps_passe','unite_temps')
+    def _compute_temps_passe_heure(self):
+        for obj in self:
+            tps=0
+            if obj.unite_temps=="heure":
+                tps = obj.temps_passe
+            if obj.unite_temps=="demi-jour":
+                tps = obj.temps_passe*3.5
+            if obj.unite_temps=="jour":
+                tps = obj.temps_passe*7
+            obj.temps_passe_heure = tps
+
+
     affaire_id             = fields.Many2one('is.affaire', 'Affaire', required=True)
     date                   = fields.Date("Date", required=True, default=lambda self: fields.Datetime.now())
     associe_id             = fields.Many2one('res.users', 'Associé', default=lambda self: self.env.user)
     sous_traitant_id       = fields.Many2one('res.partner', 'Sous-Traitant')
     temps_passe            = fields.Float("Temps passé", required=True)
     unite_temps            = fields.Selection([('heure','Heure'),('demi-jour','Demi-journée'),('jour','Jour')], "Unité de temps", default="heure", required=True)
+    temps_passe_heure      = fields.Float(compute=_compute_temps_passe_heure, string="Temps passé (H)", store=True )
     nb_stagiaire           = fields.Integer("Nombre de stagiaires")
     temps_formation        = fields.Float(compute=_temps_formation, string="Temps de formation", store=True, )
     visio                  = fields.Boolean("Visio", default=False)
@@ -342,7 +357,7 @@ class is_affaire_intervention(models.Model):
     montant_non_facturable = fields.Float(compute=_montant_non_facturable, string="Montant non facturable", store=True)
     commentaire            = fields.Text(u"Commentaire")
 
- 
+
 
 
     # def write(self, cr, uid, ids, vals, context=None):
