@@ -284,8 +284,7 @@ Le Client s’engage à communiquer aux stagiaires ces éléments relatifs au pr
                 </p>
                 <p class="texte">
                     Le Règlement Intérieur de <span t-field="res_company.name"/> établi conformément aux articles L6352-3 et L6352-4 et R6352-1 à 
-                    R6352-15 du Code du Travail est affiché dans ses locaux et consultable/téléchargeable sur son site internet : <br />
-                    https://www.coheliance.com/wp-content/uploads/2018/07/REGLEMENT_INTERIEUR_COHELIANCE_v5.pdf
+                    R6352-15 du Code du Travail est affiché dans ses locaux et consultable/téléchargeable sur son site internet : https://www.coheliance.com
                 </p>
 
 
