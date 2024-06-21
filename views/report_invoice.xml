@@ -175,7 +175,7 @@
                     <div class="col-xs-12">
                         <p>Règlement par chèque à l'ordre de <b t-field="o.company_id.name"/></p>
                         <p>ou par virement bancaire (merci de mentionner le n° de la facture lors de tout règlement)</p>
-                        <table style="border:1pt solid black;" width="70%">
+                        <table style="border:1pt solid black;" width="100%">
                             <thead>
                                 <tr>
                                     <th>IBAN</th>
