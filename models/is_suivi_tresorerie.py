@@ -39,24 +39,6 @@ class is_suivi_tresorerie(models.Model):
     @api.model
     def create(self, vals):
         cr=self._cr
-        # cr.execute("""
-        #     CREATE OR REPLACE FUNCTION fsens(t text) RETURNS integer AS $$
-        #             BEGIN
-
-        #                 IF t = ANY (ARRAY['out_refund'::character varying::text, 'in_invoice'::character varying::text]) THEN
-        #                     RETURN -1;
-        #                 ELSE
-        #                     RETURN 1;
-        #                 END IF;
-
-        #             END;
-        #     $$ LANGUAGE plpgsql;
-        #     SELECT sum(fsens(ai.move_type)*ai.residual)
-        #     FROM account_move ai
-        #     WHERE ai.state in ('open', 'paid') and ai.move_type in ('out_invoice', 'out_refund')
-        #           and ai.invoice_date>='2016-06-01' 
-        # """)
-
         cr.execute("""
             SELECT sum(amount_residual_signed)
             FROM account_move
@@ -67,7 +49,6 @@ class is_suivi_tresorerie(models.Model):
 
         reste_a_payer=0
         for row in cr.fetchall():
-            print(row)
             reste_a_payer=row[0]
         vals['reste_a_payer']=reste_a_payer
         vals['tresorerie']=vals['montant_tresorerie']+reste_a_payer

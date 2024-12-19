@@ -27,7 +27,6 @@ class AccountMove(models.Model):
             if len(invoices)>1:
                 msg='Attention : Il existe une autre facture du même montant à cette même date et pour ce même fournisseur'
             obj.is_msg_err=msg
-        #return
 
 
     @api.depends('invoice_line_ids','state')
@@ -43,8 +42,6 @@ class AccountMove(models.Model):
                 for line in obj.invoice_line_ids:
                     if not line.is_affaire_id:
                         line.is_affaire_id=obj.is_affaire_id.id
-        #return
-
 
 
     order_id                 = fields.Many2one('sale.order', 'Commande', compute=_compute_order_id,store=True)
@@ -54,20 +51,6 @@ class AccountMove(models.Model):
     is_personne_concernee_id = fields.Many2one('res.users', u'Personne concernée')
     is_msg_err               = fields.Char('Message', compute='_compute_is_msg_err', readonly=True)
     supplier_invoice_number  = fields.Char('Numéro de facture fournisseur')
-
-
-    # def actualiser_affaire_sur_facture_action(self):
-    #     for obj in self:
-    #         if obj.order_id and not obj.is_affaire_id:
-    #             obj.is_affaire_id = obj.order_id.affaire_id
-
-
-    # def actualiser_affaire_sur_ligne_action(self):
-    #     for obj in self:
-    #         if obj.is_affaire_id:
-    #             for line in obj.invoice_line:
-    #                 if not line.is_affaire_id:
-    #                     line.is_affaire_id = obj.is_affaire_id.id
 
 
     def voir_facture_fournisseur(self):
@@ -83,20 +66,6 @@ class AccountMove(models.Model):
             return res
 
 
-    # def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
-    #     if not args:
-    #         args = []
-    #     if name:
-    #         filtre=['|',('name','ilike', name),('internal_number','ilike', name)]
-    #         ids = self.search(cr, user, filtre, limit=limit, context=context)
-    #     else:
-    #         ids = self.search(cr, user, args, limit=limit, context=context)
-
-
-    #     result = self.name_get(cr, user, ids, context=context)
-    #     return result
-
-
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
@@ -104,27 +73,5 @@ class AccountMoveLine(models.Model):
     is_responsable_id          = fields.Many2one('res.users', 'Responsable', related='account_id.is_responsable_id', readonly=True)
     is_affaire_id              = fields.Many2one('is.affaire', 'Affaire')
     is_account_invoice_line_id = fields.Integer('Lien entre account_invoice_line et account_move_line pour la migration')
-
-
-    # def write(self, values):
-    #     print(self,values)
-    #     res = super().write(values)
-    #     return res
-
-
-
-    # def product_id_change(self, product, uom_id, qty=0, name='', type='out_invoice',
-    #         partner_id=False, fposition_id=False, price_unit=False, currency_id=False,
-    #         company_id=None, is_affaire_id=False):
-    #     res = super(account_invoice_line, self).product_id_change(product, uom_id, qty=qty, name=name, type=type,
-    #         partner_id=partner_id, fposition_id=fposition_id, price_unit=price_unit, currency_id=currency_id,
-    #         company_id=company_id)
-    #     if 'value' in res:
-    #         if 'name' in res['value']:
-    #             res['value']['name']=False
-    #         if is_affaire_id:
-    #             res['value']['is_affaire_id']=is_affaire_id
-    #     return res
-
 
 

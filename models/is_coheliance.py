@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta, date
-from odoo import api, fields, models
-from odoo.exceptions import Warning
+from odoo import api, fields, models # type: ignore
+from odoo.exceptions import Warning  # type: ignore
+
+
+STRUCTURE=[('campus_at', 'CAMPUS AT')]
 
 
 def _get_annee():
@@ -101,14 +104,15 @@ class IsAffaire(models.Model):
             return res
 
 
-    name = fields.Char("Code de l'affaire")
-    version = fields.Char("Version", required=True, size=4, default="1")
-    date_creation = fields.Date("Date de création", default=lambda self: fields.Datetime.now())
+    name           = fields.Char("Code de l'affaire")
+    version        = fields.Char("Version", required=True, size=4, default="1")
+    date_creation  = fields.Date("Date de création", default=lambda self: fields.Datetime.now())
     date_signature = fields.Date("Date de signature")
-    date_relance = fields.Date("Date de relance", default=lambda self: fields.Datetime.now()+timedelta(30))
-    createur_id = fields.Many2one('res.users', 'Créateur', default=lambda self: self.env.user)
+    date_relance   = fields.Date("Date de relance", default=lambda self: fields.Datetime.now()+timedelta(30))
+    createur_id    = fields.Many2one('res.users', 'Créateur', default=lambda self: self.env.user)
     interlocutrice_id = fields.Many2one('res.users', 'Interlocutrice administrative', default=lambda self: self.env.user)
     pilote_id = fields.Many2one('res.users', 'Pilote', required=True, default=lambda self: self.env.user)
+    structure = fields.Selection(selection=STRUCTURE, string="Structure")
     client_id = fields.Many2one('res.partner', 'Client', required=True)
     contact_client_id = fields.Many2one('res.partner', 'Contact client', required=False)
     article_id = fields.Many2one('product.template', 'Article', required=True)

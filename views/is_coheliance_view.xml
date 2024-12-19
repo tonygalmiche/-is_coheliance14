@@ -8,27 +8,26 @@
             <field name="arch" type="xml">
                 <tree decoration-danger="state in ('en_attente') and date_relance &lt; current_date and not date_relance"  decoration-muted="state == 'annule'">
                     <field name="name" />
-                    <field name="affaire_parent_id" widget="many2one_clickable"/>
-                    <field name="version" />
-                    <field name="client_id" />
-                    <field name="intitule" />
-                    <field name="date_debut" />
-                    <field name="date_fin" />
-                    <field name="date_relance" />
-                    <field name="pilote_id" />
-                    <field name="article_id" />
-                    <field name="total_budget_prevu" sum="Total" />
-                    <field name="date_validation" />
-                    <field name="date_solde" />
+                    <field name="affaire_parent_id"  optional="show" widget="many2one_clickable"/>
+                    <field name="version"            optional="show"/>
+                    <field name="client_id"          optional="show"/>
+                    <field name="intitule"           optional="show"/>
+                    <field name="date_debut"         optional="show"/>
+                    <field name="date_fin"           optional="show"/>
+                    <field name="date_relance"       optional="show"/>
+                    <field name="pilote_id"          optional="show"/>
+                    <field name="structure"          optional="show"/>
+                    <field name="article_id"         optional="show"/>
+                    <field name="total_budget_prevu" optional="show" sum="Total" />
+                    <field name="date_validation"    optional="show"/>
+                    <field name="date_solde"         optional="show"/>
                     <field name="origine_financement_id"      invisible="context.get('formation',True)"/>
                     <field name="type_stagiaire_organisme_id" invisible="context.get('formation',True)"/>
                     <field name="typologie_stagiaire_id"      invisible="context.get('formation',True)"/>
-                    <field name="resultat_net"       sum="Total"/>
-                    <field name="nb_stagiaire"       sum="Total" optional="hide"/>
-                    <field name="nb_stagiaire_visio" sum="Total" optional="hide"/>
-
-
-                    <field name="state" />
+                    <field name="resultat_net"       optional="show" sum="Total"/>
+                    <field name="nb_stagiaire"       optional="hide" sum="Total"/>
+                    <field name="nb_stagiaire_visio" optional="hide" sum="Total"/>
+                    <field name="state" optional="show"/>
                 </tree>
             </field>
         </record>
@@ -48,7 +47,7 @@
                                 <field name="affaire_parent_id"/>
                                 <field name="version" />
                                 <field name="pilote_id"/>
-
+                                <field name="structure"/>
                             </group>
                             <group>
                                 <field name="date_creation"/>
@@ -203,15 +202,11 @@
                                     <field name="facture_ids" nolabel="1">
                                         <tree>
                                             <button title="Facture fournisseur" name="voir_facture_fournisseur" type="object" icon="fa-search-plus" />
-                                            <!-- <field name="internal_number"/> -->
                                             <field name="is_refacturable"/>
                                             <field name="partner_id"     string="Fournisseur" widget="many2one_clickable"/>
                                             <field name="is_nom_fournisseur"/>
                                             <field name="is_personne_concernee_id"/> 
                                             <field name="invoice_date"/>
-                                            <!-- <field name="supplier_invoice_number"/>
-                                            <field name="amount_untaxed" string="Total HT"  sum="Total"/>
-                                            <field name="amount_total"   string="Total TTC" sum="Total"/> -->
                                             <field name="state"/>
                                         </tree>
                                     </field>
@@ -282,7 +277,7 @@
                         <field name="name"/>
                         <field name="client_id"/>
                         <field name="pilote_id"/>
-                        <!-- <filter name="formation_filter" filter_domain="[]" context="{'formation':False}" string="Champs suivi Formation"/> -->
+                        <field name="structure"/>
                 </search>
                 </field>
             </record>

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import api, fields, models # type: ignore
+from odoo.exceptions import Warning  # type: ignore
+from odoo.addons.is_coheliance14.models.is_coheliance import STRUCTURE # type: ignore
 import datetime
-from odoo.exceptions import Warning
 
 
 class is_export_compta(models.Model):
@@ -91,7 +92,7 @@ class is_export_compta(models.Model):
                     for row in cr.fetchall():
 
                         #** Recherche de l'affaire *********************************
-                        affaire    = ''
+                        affaire = structure = ''
                         affaire_id = row[9] or False
                         filter=[
                             ('move_id', '=', row[10]),
@@ -103,7 +104,9 @@ class is_export_compta(models.Model):
                             if line.is_affaire_id.id:
                                 affaire_id = line.is_affaire_id.id
                         if affaire_id : 
-                            affaire = self.env['is.affaire'].browse(affaire_id).name
+                            affaire_obj = self.env['is.affaire'].browse(affaire_id)
+                            affaire   = affaire_obj.name
+                            structure = affaire_obj.structure
                         #***********************************************************
 
                         nom_fournisseur=row[7]
@@ -125,6 +128,7 @@ class is_export_compta(models.Model):
                             'credit'            : row[12],
                             'devise'            : 'E',
                             'piece'             : row[2],
+                            'structure'         : structure,
                             'commentaire'       : False,
                         }
                         self.env['is.export.compta.ligne'].create(vals)
@@ -145,6 +149,7 @@ class is_export_compta_ligne(models.Model):
     debit            = fields.Float("Débit")
     credit           = fields.Float("Crédit")
     devise           = fields.Char("Devise")
+    structure        = fields.Selection(selection=STRUCTURE, string="Structure")
     commentaire      = fields.Char("Commentaire")
 
 
